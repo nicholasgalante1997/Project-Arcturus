@@ -89,6 +89,27 @@
   font: 500 var(--s-text-sm) / 1.4 var(--s-font-ui);
 }
 
+.v2-posts-page__tag-filter {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s-space-3);
+  margin: 0 0 var(--s-space-6);
+  color: var(--s-text-muted);
+  font: 500 var(--s-text-sm) / 1.4 var(--s-font-ui);
+}
+
+.v2-posts-page__tag-filter button {
+  padding: 0.2rem 0;
+  border: 0;
+  background: transparent;
+  color: var(--s-accent);
+  font: inherit;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 0.25em;
+}
+
 .v2-posts-page .v2-posts-grid {
   display: block;
   margin: 0;

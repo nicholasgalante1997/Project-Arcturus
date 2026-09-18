@@ -348,7 +348,7 @@ header.v2-header .theme-toggle svg {
   max-inline-size: var(--s-measure);
   margin: 0 0 var(--s-space-8);
   color: var(--s-text-muted);
-  font-size: var(--s-text-lg);
+  font-size: var(--s-text-subtle);
   line-height: 1.55;
 }
 

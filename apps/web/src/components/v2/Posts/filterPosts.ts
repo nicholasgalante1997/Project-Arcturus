@@ -1,20 +1,18 @@
 import type { Post } from '@/types/Post';
 
-export function filterPosts(posts: readonly Post[], query: string): Post[] {
+export function filterPosts(posts: readonly Post[], query: string, tag: string | null = null): Post[] {
   const normalizedQuery = query.trim().toLocaleLowerCase();
-  if (!normalizedQuery) return [...posts];
+  const normalizedTag = tag?.trim().toLocaleLowerCase() ?? '';
 
   return posts.filter((post) => {
-    const searchableValues = [
-      post.title,
-      post.excerpt,
-      post.category,
-      ...post.tags,
-      ...post.searchTerms
-    ];
+    const matchesTag =
+      !normalizedTag || post.tags.some((postTag) => postTag.toLocaleLowerCase() === normalizedTag);
+    if (!matchesTag) return false;
 
-    return searchableValues.some((value) =>
-      value.toLocaleLowerCase().includes(normalizedQuery)
-    );
+    if (!normalizedQuery) return true;
+
+    const searchableValues = [post.title, post.excerpt, post.category, ...post.tags, ...post.searchTerms];
+
+    return searchableValues.some((value) => value.toLocaleLowerCase().includes(normalizedQuery));
   });
 }

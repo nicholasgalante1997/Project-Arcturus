@@ -2,11 +2,13 @@ import { memo, use, useMemo } from 'react';
 import { useSearchParams } from 'react-router';
 
 import copy from '@/content/en.json';
-import { formatMessage } from '@/utils/formatMessage';
 import { pipeline } from '@/utils/pipeline';
 import { withProfiler } from '@/utils/profiler';
 
+import { PostsEmptyState } from './components/PostsEmptyState';
+import { PostsFilterStatus } from './components/PostsFilterStatus';
 import { PostsGridView } from './components/PostsGrid';
+import { PostsSearch } from './components/PostsSearch';
 import { filterPosts } from './filterPosts';
 
 import type { V2PostsPageViewProps } from './types';
@@ -16,9 +18,13 @@ function V2PostsPageView({ queries }: V2PostsPageViewProps) {
   const allPosts = use(postsQuery.promise);
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('q') ?? '';
+  const selectedTag = searchParams.get('tag');
   const normalizedQuery = searchQuery.trim();
 
-  const filteredPosts = useMemo(() => filterPosts(allPosts, normalizedQuery), [allPosts, normalizedQuery]);
+  const filteredPosts = useMemo(
+    () => filterPosts(allPosts, normalizedQuery, selectedTag),
+    [allPosts, normalizedQuery, selectedTag]
+  );
 
   const updateSearch = (query: string): void => {
     const nextParams = new URLSearchParams(searchParams);
@@ -27,7 +33,11 @@ function V2PostsPageView({ queries }: V2PostsPageViewProps) {
     setSearchParams(nextParams, { replace: true });
   };
 
-  const resultMessage = filteredPosts.length === 1 ? copy.posts.resultCountOne : copy.posts.resultCountMany;
+  const clearTag = (): void => {
+    const nextParams = new URLSearchParams(searchParams);
+    nextParams.delete('tag');
+    setSearchParams(nextParams, { replace: true });
+  };
 
   return (
     <div className="v2-posts-page">
@@ -37,50 +47,25 @@ function V2PostsPageView({ queries }: V2PostsPageViewProps) {
             <h1 className="v2-visually-hidden">{copy.posts.title}</h1>
             <p>{copy.posts.intro}</p>
           </div>
-          <div className="v2-posts-search">
-            <label className="v2-visually-hidden" htmlFor="posts-search">
-              {copy.posts.searchLabel}
-            </label>
-            <svg
-              className="v2-posts-search__icon"
-              width="18"
-              height="18"
-              viewBox="0 0 18 18"
-              fill="none"
-              aria-hidden="true"
-            >
-              <circle cx="7.75" cy="7.75" r="5.25" stroke="currentColor" strokeWidth="1.5" />
-              <path d="m11.5 11.5 4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-            </svg>
-            <input
-              id="posts-search"
-              type="search"
-              value={searchQuery}
-              placeholder={copy.posts.searchPlaceholder}
-              className="v2-posts-search__input"
-              onChange={(event) => updateSearch(event.target.value)}
-            />
-          </div>
+          <PostsSearch query={searchQuery} onChange={updateSearch} />
         </header>
 
-        {normalizedQuery && filteredPosts.length > 0 && (
-          <p className="v2-posts-page__count" aria-live="polite">
-            {formatMessage(resultMessage, {
-              count: filteredPosts.length,
-              query: normalizedQuery
-            })}
-          </p>
-        )}
+        <PostsFilterStatus
+          count={filteredPosts.length}
+          query={normalizedQuery}
+          tag={selectedTag}
+          onClearTag={clearTag}
+        />
 
         {filteredPosts.length > 0 ? (
           <PostsGridView posts={filteredPosts} />
         ) : (
-          <div className="v2-posts-empty" aria-live="polite">
-            <p>{formatMessage(copy.posts.noResults, { query: normalizedQuery })}</p>
-            <button type="button" onClick={() => updateSearch('')}>
-              {copy.posts.clearSearch}
-            </button>
-          </div>
+          <PostsEmptyState
+            query={normalizedQuery}
+            tag={selectedTag}
+            onClearSearch={() => updateSearch('')}
+            onClearTag={clearTag}
+          />
         )}
       </div>
     </div>

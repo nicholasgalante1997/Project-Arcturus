@@ -44,9 +44,9 @@
   "home": {
     "hero": {
       "title": "Nick Galante",
-      "subtitle": "I'm a senior software engineer and <span class=\"subheadline-highlight\">technical lead</span> at Charter Communications. I like to work on ambitious technical problems. Over my career, I've architected, implemented, deployed, and maintained technical solutions that <span class=\"subheadline-tooltip\">have served millions of users at scale</span>. I enjoy working on <span class=\"subheadline-highlight\">distributed systems</span>. I have worked extensively improving and scaling <span class=\"subheadline-highlight\">microfrontends and enterprise React architectures</span>. I am meticulous and obsessive about performance and optimization. More recently, I've been interested in cryptography, and <span class=\"subheadline-highlight\">large language model agentic developer tooling</span>.",
+      "subtitle": "I'm a Senior SWE and <span class=\"subheadline-highlight\">Technical Lead</span> at Charter Communications. I've architected, deployed, and maintained technical solutions that <span class=\"subheadline-tooltip\">have served millions of users at scale</span>. I enjoy working on <span class=\"subheadline-highlight\">distributed systems</span>. I have worked extensively improving and scaling <span class=\"subheadline-highlight\">microfrontends and enterprise React architectures</span>. I am meticulous and obsessive about performance and optimization. More recently, I've been interested in cryptography, and <span class=\"subheadline-highlight\">large language model agentic developer tooling</span>.",
       "cta": "Check out some of my projects",
-      "tooltipMessage": "Not at Charter, I've been mostly focused on internal tooling, saas, and R&D for DX here, but with Amazon Games I launched experiences on digital goods storefronts in collaboration with Steam to serve millions of concurrent users, supporting major title drops like Left 4 Dead 2, New World, and Lost Ark with direct digital fulfillment. Lots of fun."
+      "tooltipMessage": "At Charter, I've been mostly focused on company-wide internal tooling, and R&D for DX and UX here, but with Amazon Games I launched experiences on the digital goods storefronts to serve millions of concurrent users, supporting major title drops like Left 4 Dead 2, New World, and Lost Ark with direct digital fulfillment."
     },
     "selectedWritingLabel": "Selected writing",
     "recentWritingTitle": "Recent writing",
@@ -55,13 +55,15 @@
   "posts": {
     "title": "Posts",
     "readPostLabel": "Read {title}",
-    "intro": "This series of posts is a mixed bag. Sometimes, I'll write about cryptography, other times React. There might be times I write about agent tooling. <i>Maybe one day I'll post a whole soliloquy hidden in plainsight with utf8 variation selector embedding. You don't control me. I'll do it all.</i>",
+    "intro": "This series of posts is a mixed bag. Sometimes, I'll write about cryptography, other times React. There might be times I write about agent tooling, or a different flavor of the weak.",
     "searchLabel": "Search posts",
     "searchPlaceholder": "Search posts",
     "resultCountOne": "{count} post matches “{query}”.",
     "resultCountMany": "{count} posts match “{query}”.",
     "noResults": "No posts match “{query}”.",
-    "clearSearch": "Clear search"
+    "clearSearch": "Clear search",
+    "tagFilter": "Tagged with “{tag}”.",
+    "clearTagFilter": "Clear tag filter"
   },
   "postDetail": {
     "breadcrumbLabel": "Breadcrumb",
@@ -84,10 +86,9 @@
   },
   "about": {
     "hero": {
-      "eyebrow": "Senior Software Engineer & Technical Lead",
       "title": "I'm Nick Galante. Welcome to my website!",
-      "introduction": "I'm a senior software engineer and <span class=\"subheadline-highlight\">technical lead</span> at Charter Communications. I like to work on ambitious technical problems. Over my career, I've architected, implemented, deployed, and maintained technical solutions that <span class=\"subheadline-tooltip\">have served hundreds of millions of users at scale</span>. I enjoy working on <span class=\"subheadline-highlight\">distributed systems</span>. I have worked extensively improving and scaling <span class=\"subheadline-highlight\">microfrontends and enterprise React architectures</span>. I am meticulous and obsessive about performance and optimization. More recently, I've been interested in cryptography, and <span class=\"subheadline-highlight\">large language model agentic developer tooling</span>.",
-      "tooltipMessage": "Not at Charter, I've been mostly focused on internal tooling, saas, and R&D for DX here, but with Amazon Games I launched experiences on digital goods storefronts in collaboration with Steam to serve millions of concurrent users, supporting major title drops like Left 4 Dead 2, New World, and Lost Ark with direct digital fulfillment. Lots of fun.",
+      "introduction": "I'm a Senior SWE and <span class=\"subheadline-highlight\">Technical Lead</span> at Charter Communications. I've architected, deployed, and maintained technical solutions that <span class=\"subheadline-tooltip\">have served millions of users at scale</span>. I enjoy working on <span class=\"subheadline-highlight\">distributed systems</span>. I have worked extensively improving and scaling <span class=\"subheadline-highlight\">microfrontends and enterprise React architectures</span>. I am meticulous and obsessive about performance and optimization. More recently, I've been interested in cryptography, and <span class=\"subheadline-highlight\">large language model agentic developer tooling</span>.",
+      "tooltipMessage": "At Charter, I've been mostly focused on company-wide internal tooling, and R&D for DX and UX here, but with Amazon Games I launched experiences on the digital goods storefronts to serve millions of concurrent users, supporting major title drops like Left 4 Dead 2, New World, and Lost Ark with direct digital fulfillment.",
       "role": "Senior Software Engineer — Technical Lead, Agent Tools Design Technology at Charter Communications",
       "availability": "I'm currently not interested in new roles, but I am available to consult on technical problems of scale or interest, or projects that support the benefit and welfare of animals.",
       "contactLabel": "Start a conversation",

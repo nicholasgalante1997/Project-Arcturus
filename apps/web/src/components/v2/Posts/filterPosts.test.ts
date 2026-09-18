@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'bun:test';
 
-import type { Post } from '@/types/Post';
-
 import { filterPosts } from './filterPosts';
+
+import type { Post } from '@/types/Post';
 
 function post(id: string, options: Partial<Post> = {}): Post {
   return {
@@ -43,5 +43,11 @@ describe('filterPosts', () => {
 
   test('returns all posts for a blank query', () => {
     expect(filterPosts(posts, '   ')).toEqual(posts);
+  });
+
+  test('filters by an exact tag independently from full-text search', () => {
+    expect(filterPosts(posts, '', 'systems').map(({ id }) => id)).toEqual(['alpha']);
+    expect(filterPosts(posts, 'rust', 'systems').map(({ id }) => id)).toEqual(['alpha']);
+    expect(filterPosts(posts, 'browser', 'systems')).toEqual([]);
   });
 });

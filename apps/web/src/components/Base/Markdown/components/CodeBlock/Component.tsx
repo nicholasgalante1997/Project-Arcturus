@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
 import css from 'react-syntax-highlighter/dist/esm/languages/prism/css';
@@ -74,6 +74,16 @@ const supportedLanguages = new Set([
   'markdown'
 ]);
 
+type SystemTheme = 'dark' | 'light';
+
+function getSystemTheme(): SystemTheme {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+    return 'light';
+  }
+
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
 const CodeComponent: React.FC<CodeComponentProps> = ({ inline, className, children, ...props }) => {
   // Extract language from className
   const match = /language-(\w+)/.exec(className || '');
@@ -82,13 +92,23 @@ const CodeComponent: React.FC<CodeComponentProps> = ({ inline, className, childr
   const shouldHighlight = !inline && actualLanguage && supportedLanguages.has(actualLanguage);
 
   const { theme } = useArcThemeContext();
-  const systemTheme = useMemo(() => {
-    if (typeof window !== 'undefined' && "matchMedia" in window) {
-      return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+  // Start from light on both the server and the first client render so prerendered
+  // markup hydrates consistently. The browser preference is applied after hydration.
+  const [systemTheme, setSystemTheme] = useState<SystemTheme>('light');
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+      return undefined;
     }
 
-    return null;
-  }, [window?.matchMedia]);
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const updateSystemTheme = () => setSystemTheme(getSystemTheme());
+
+    updateSystemTheme();
+    mediaQuery.addEventListener('change', updateSystemTheme);
+
+    return () => mediaQuery.removeEventListener('change', updateSystemTheme);
+  }, []);
 
   const codeTheme = useMemo(() => {
     if (theme === 'system') {

@@ -1,9 +1,14 @@
-import { memo, useRef, useState } from 'react';
+import { type FormEvent, memo, useRef, useState } from 'react';
 
 import copy from '@/content/en.json';
 import { pipeline } from '@/utils/pipeline';
 
+import { ContactFormSuccess } from '../ContactFormSuccess';
+import { ContactIdentityFields } from '../ContactIdentityFields';
+import { ContactMessageFields } from '../ContactMessageFields';
+
 import type { ContactFormData } from '../../types';
+import type { ContactFormChangeEvent } from '../types';
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xnnpkkjo';
 const { contact } = copy;
@@ -50,7 +55,7 @@ function ContactFormView() {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!formRef.current) return;
@@ -86,7 +91,7 @@ function ContactFormView() {
       });
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: ContactFormChangeEvent) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
@@ -97,15 +102,7 @@ function ContactFormView() {
   };
 
   if (submitSuccess) {
-    return (
-      <div className="v2-contact-form__success" role="status">
-        <p className="v2-contact-form__success-mark" aria-hidden="true">
-          ✓
-        </p>
-        <h3>{contact.successTitle}</h3>
-        <p>{contact.successDescription}</p>
-      </div>
-    );
+    return <ContactFormSuccess />;
   }
 
   return (
@@ -118,89 +115,8 @@ function ContactFormView() {
       ref={formRef}
       noValidate
     >
-      <div className="v2-contact-field">
-        <label htmlFor="contact-name">{contact.fields.name}</label>
-        <input
-          id="contact-name"
-          name="name"
-          type="text"
-          value={formData.name}
-          onChange={handleChange}
-          required
-          autoComplete="name"
-          aria-invalid={Boolean(errors.name)}
-          aria-describedby={errors.name ? 'contact-name-error' : undefined}
-        />
-        {errors.name && (
-          <p id="contact-name-error" className="v2-contact-field__error">
-            {errors.name}
-          </p>
-        )}
-      </div>
-
-      <div className="v2-contact-field">
-        <label htmlFor="contact-email">{contact.fields.email}</label>
-        <input
-          id="contact-email"
-          name="email"
-          type="email"
-          value={formData.email}
-          onChange={handleChange}
-          required
-          autoComplete="email"
-          aria-invalid={Boolean(errors.email)}
-          aria-describedby={errors.email ? 'contact-email-error' : undefined}
-        />
-        {errors.email && (
-          <p id="contact-email-error" className="v2-contact-field__error">
-            {errors.email}
-          </p>
-        )}
-      </div>
-
-      <div className="v2-contact-field">
-        <label htmlFor="contact-subject">{contact.fields.subject}</label>
-        <select
-          id="contact-subject"
-          name="subject"
-          value={formData.subject}
-          onChange={handleChange}
-          required
-          aria-invalid={Boolean(errors.subject)}
-          aria-describedby={errors.subject ? 'contact-subject-error' : undefined}
-        >
-          {contact.subjects.map((option) => (
-            <option key={option.value || 'empty'} value={option.value}>
-              {option.label}
-            </option>
-          ))}
-        </select>
-        {errors.subject && (
-          <p id="contact-subject-error" className="v2-contact-field__error">
-            {errors.subject}
-          </p>
-        )}
-      </div>
-
-      <div className="v2-contact-field">
-        <label htmlFor="contact-message">{contact.fields.message}</label>
-        <textarea
-          id="contact-message"
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          required
-          rows={6}
-          placeholder={contact.fields.messagePlaceholder}
-          aria-invalid={Boolean(errors.message)}
-          aria-describedby={errors.message ? 'contact-message-error' : undefined}
-        />
-        {errors.message && (
-          <p id="contact-message-error" className="v2-contact-field__error">
-            {errors.message}
-          </p>
-        )}
-      </div>
+      <ContactIdentityFields formData={formData} errors={errors} onChange={handleChange} />
+      <ContactMessageFields formData={formData} errors={errors} onChange={handleChange} />
 
       {submitError && (
         <div className="v2-contact-form__error" role="alert">

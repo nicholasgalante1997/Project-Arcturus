@@ -13,7 +13,7 @@
   min-block-size: auto;
   padding: clamp(3.5rem, 8vw, 7rem) 0 clamp(3rem, 6vw, 5rem);
   text-align: start;
-  overflow: visible;
+  overflow: hidden;
 }
 
 .v2-home-page .v2-hero__content {
@@ -51,7 +51,7 @@
   max-inline-size: 56ch;
   margin: 0 0 var(--s-space-6);
   color: var(--s-text-muted);
-  font-size: var(--s-text-lg);
+  font-size: var(--s-text-subtle);
   line-height: 1.55;
 }
 
