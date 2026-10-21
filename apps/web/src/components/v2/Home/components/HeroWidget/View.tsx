@@ -3,7 +3,7 @@ import { memo } from 'react';
 import copy from '@/content/en.json';
 import { pipeline } from '@/utils/pipeline';
 
-import { HeroCollage, HeroContent } from './components';
+import { HeroContent } from './components';
 
 import type { HeroWidgetProps } from '../../types';
 
@@ -29,7 +29,6 @@ function HeroWidgetView({
         ctaHref={ctaHref}
         tooltipMessage={tooltipMessage}
       />
-      <HeroCollage />
     </section>
   );
 }

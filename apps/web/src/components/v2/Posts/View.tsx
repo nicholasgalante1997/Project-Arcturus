@@ -6,10 +6,12 @@ import { pipeline } from '@/utils/pipeline';
 import { withProfiler } from '@/utils/profiler';
 
 import { PostsEmptyState } from './components/PostsEmptyState';
+import { PostsFilters } from './components/PostsFilters';
 import { PostsFilterStatus } from './components/PostsFilterStatus';
 import { PostsGridView } from './components/PostsGrid';
 import { PostsSearch } from './components/PostsSearch';
 import { filterPosts } from './filterPosts';
+import { sortPosts } from './sortPosts';
 
 import type { V2PostsPageViewProps } from './types';
 
@@ -19,23 +21,30 @@ function V2PostsPageView({ queries }: V2PostsPageViewProps) {
   const [searchParams, setSearchParams] = useSearchParams();
   const searchQuery = searchParams.get('q') ?? '';
   const selectedTag = searchParams.get('tag');
+  const selectedCategory = searchParams.get('category');
+  const sortOrder = searchParams.get('sort') === 'oldest' ? 'oldest' : 'newest';
   const normalizedQuery = searchQuery.trim();
+  const hasFilters = Boolean(normalizedQuery || selectedTag || selectedCategory);
+
+  const categories = useMemo(() => [...new Set(allPosts.map(({ category }) => category))].sort(), [allPosts]);
 
   const filteredPosts = useMemo(
-    () => filterPosts(allPosts, normalizedQuery, selectedTag),
-    [allPosts, normalizedQuery, selectedTag]
+    () => sortPosts(filterPosts(allPosts, normalizedQuery, selectedTag, selectedCategory), sortOrder),
+    [allPosts, normalizedQuery, selectedTag, selectedCategory, sortOrder]
   );
 
-  const updateSearch = (query: string): void => {
+  const updateParameter = (key: string, value: string): void => {
     const nextParams = new URLSearchParams(searchParams);
-    if (query) nextParams.set('q', query);
-    else nextParams.delete('q');
+    if (value) nextParams.set(key, value);
+    else nextParams.delete(key);
     setSearchParams(nextParams, { replace: true });
   };
 
-  const clearTag = (): void => {
+  const clearFilters = (): void => {
     const nextParams = new URLSearchParams(searchParams);
+    nextParams.delete('q');
     nextParams.delete('tag');
+    nextParams.delete('category');
     setSearchParams(nextParams, { replace: true });
   };
 
@@ -43,30 +52,33 @@ function V2PostsPageView({ queries }: V2PostsPageViewProps) {
     <div className="v2-posts-page">
       <div className="wrapper">
         <header className="v2-posts-page__header">
-          <div className="v2-posts-page__introduction">
-            <h1 className="v2-visually-hidden">{copy.posts.title}</h1>
-            <p>{copy.posts.intro}</p>
-          </div>
-          <PostsSearch query={searchQuery} onChange={updateSearch} />
+          <h1 className="v2-visually-hidden">{copy.posts.title}</h1>
+          <PostsSearch query={searchQuery} onChange={(query) => updateParameter('q', query)} />
+          <PostsFilters
+            categories={categories}
+            selectedCategory={selectedCategory}
+            sortOrder={sortOrder}
+            onCategoryChange={(category) => updateParameter('category', category)}
+            onSortChange={(sort) => updateParameter('sort', sort === 'newest' ? '' : sort)}
+          />
         </header>
 
         <PostsFilterStatus
           count={filteredPosts.length}
-          query={normalizedQuery}
+          total={allPosts.length}
+          hasFilters={hasFilters}
           tag={selectedTag}
-          onClearTag={clearTag}
+          onClearTag={() => updateParameter('tag', '')}
+          onClearFilters={clearFilters}
         />
 
-        {filteredPosts.length > 0 ? (
-          <PostsGridView posts={filteredPosts} />
-        ) : (
-          <PostsEmptyState
-            query={normalizedQuery}
-            tag={selectedTag}
-            onClearSearch={() => updateSearch('')}
-            onClearTag={clearTag}
-          />
-        )}
+        <div id="posts-results">
+          {filteredPosts.length > 0 ? (
+            <PostsGridView posts={filteredPosts} />
+          ) : (
+            <PostsEmptyState query={normalizedQuery} onClearFilters={clearFilters} />
+          )}
+        </div>
       </div>
     </div>
   );

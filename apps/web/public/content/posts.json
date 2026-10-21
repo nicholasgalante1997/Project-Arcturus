@@ -1,5 +1,33 @@
 [
   {
+    "id": "kirocrew-openacp",
+    "title": "KiroCrew OpenACP",
+    "date": "2026-09-19",
+    "excerpt": "This will be a short piece on how to use kirocrew with claude acp, codex acp, and underlying inference on your own hardware.",
+    "tags": [
+      "kiro-crew",
+      "acp"
+    ],
+    "image": {
+      "src": "/assets/poke-stock/mega-pikachu-gang.jpg",
+      "alt": "A lot of very large pikachu's hanging out.",
+      "aspectRatio": "16 / 9"
+    },
+    "category": "SOFTWARE ENGINEERING",
+    "subcategory": "AI",
+    "slug": "kirocrew-openacp",
+    "searchTerms": [
+      "ACP",
+      "kirocrew",
+      "claude",
+      "codex",
+      "ollama"
+    ],
+    "readingTime": "About 10 minutes",
+    "featured": true,
+    "visible": true
+  },
+  {
     "id": "johto",
     "title": "I have found yet another way to spend money on Pokemon",
     "date": "2026-05-13",
@@ -152,7 +180,7 @@
       "loclaude"
     ],
     "readingTime": "Under 5 minutes",
-    "featured": true,
+    "featured": false,
     "visible": true
   },
   {

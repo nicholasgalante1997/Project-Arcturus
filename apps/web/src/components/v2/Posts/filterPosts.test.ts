@@ -1,6 +1,7 @@
 import { describe, expect, test } from 'bun:test';
 
 import { filterPosts } from './filterPosts';
+import { sortPosts } from './sortPosts';
 
 import type { Post } from '@/types/Post';
 
@@ -49,5 +50,31 @@ describe('filterPosts', () => {
     expect(filterPosts(posts, '', 'systems').map(({ id }) => id)).toEqual(['alpha']);
     expect(filterPosts(posts, 'rust', 'systems').map(({ id }) => id)).toEqual(['alpha']);
     expect(filterPosts(posts, 'browser', 'systems')).toEqual([]);
+  });
+
+  test('combines category, tag, and query filters without partial category matches', () => {
+    expect(filterPosts(posts, '', null, ' software engineering ')).toEqual([posts[1]!]);
+    expect(filterPosts(posts, '', null, 'engineering')).toEqual([]);
+    expect(filterPosts(posts, 'rust', 'systems', 'general')).toEqual([posts[0]!]);
+    expect(filterPosts(posts, 'rust', 'systems', 'software engineering')).toEqual([]);
+    expect(filterPosts(posts, 'browser', null, 'general')).toEqual([]);
+  });
+
+  test('treats empty filters as an unfiltered archive', () => {
+    expect(filterPosts(posts, '', '  ', '  ')).toEqual(posts);
+  });
+});
+
+describe('sortPosts', () => {
+  test('orders by publication date in either direction without changing the source', () => {
+    const posts = [
+      post('middle', { date: '2025-11-01' }),
+      post('newest', { date: '2026-01-01' }),
+      post('oldest', { date: '2024-04-20' })
+    ];
+
+    expect(sortPosts(posts, 'newest').map(({ id }) => id)).toEqual(['newest', 'middle', 'oldest']);
+    expect(sortPosts(posts, 'oldest').map(({ id }) => id)).toEqual(['oldest', 'middle', 'newest']);
+    expect(posts.map(({ id }) => id)).toEqual(['middle', 'newest', 'oldest']);
   });
 });

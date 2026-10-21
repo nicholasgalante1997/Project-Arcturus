@@ -17,7 +17,7 @@ searchTerms:
   - ollama
   - loclaude
 readingTime: Under 5 minutes
-featured: true
+featured: false
 visible: true
 ---
 

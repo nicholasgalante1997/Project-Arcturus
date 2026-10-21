@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
+import { useSearchParams } from 'react-router';
 
 import { DefaultFallbackErrorComponent } from '@/components/Base/Error';
 import { V2Footer } from '@/components/v2/Footer';
@@ -10,13 +11,16 @@ import copy from '@/content/en.json';
 import { ArcThemeProvider } from '@/context/theme';
 import { pipeline } from '@/utils/pipeline';
 
+import { SiteBackground } from './components/SiteBackground';
+import { resolveBackgroundTreatment } from './background';
+
 import type { V2AppLayoutProps } from './types';
 
 /**
  * V2 App Layout component
  *
  * Composes the application shell with Header, Footer, and main content area.
- * Includes ErrorBoundary for error handling and Starfield background.
+ * Includes ErrorBoundary for error handling and a shared decorative background.
  *
  * @example
  * // Standard layout
@@ -36,6 +40,9 @@ function AppLayoutV2({
   className,
   showFooter = true
 }: V2AppLayoutProps) {
+  const [searchParams] = useSearchParams();
+  const background = resolveBackgroundTreatment(searchParams.get('background'));
+
   return (
     <ErrorBoundary
       onError={ArcSentry.sentryReactDefaultErrorHandler as (error: unknown, info: React.ErrorInfo) => void}
@@ -44,7 +51,8 @@ function AppLayoutV2({
       )}
     >
       <ArcThemeProvider>
-        <div className={clsx('v2-app-layout', className)}>
+        <div className={clsx('v2-app-layout', className)} data-background={background}>
+          <SiteBackground treatment={background} />
           <a className="v2-skip-link" href="#main-content">
             {copy.site.skipToContent}
           </a>
