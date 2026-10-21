@@ -1,21 +1,17 @@
-import { Input, Select, Textarea } from '@arcjr/void-components';
-import clsx from 'clsx';
-import { memo, useRef, useState } from 'react';
+import { type FormEvent, memo, useRef, useState } from 'react';
 
+import copy from '@/content/en.json';
 import { pipeline } from '@/utils/pipeline';
 
+import { ContactFormSuccess } from '../ContactFormSuccess';
+import { ContactIdentityFields } from '../ContactIdentityFields';
+import { ContactMessageFields } from '../ContactMessageFields';
+
 import type { ContactFormData } from '../../types';
+import type { ContactFormChangeEvent } from '../types';
 
 const FORMSPREE_ENDPOINT = 'https://formspree.io/f/xnnpkkjo';
-
-const SUBJECT_OPTIONS = [
-  { value: '', label: 'Select a subject...' },
-  { value: 'general', label: 'General Inquiry' },
-  { value: 'collaboration', label: 'Collaboration Opportunity' },
-  { value: 'feedback', label: 'Feedback' },
-  { value: 'bug', label: 'Bug Report' },
-  { value: 'other', label: 'Other' }
-];
+const { contact } = copy;
 
 function ContactFormView() {
   const [formData, setFormData] = useState<ContactFormData>({
@@ -36,30 +32,30 @@ function ContactFormView() {
     const newErrors: Partial<ContactFormData> = {};
 
     if (!formData.name.trim()) {
-      newErrors.name = 'Name is required';
+      newErrors.name = contact.validation.nameRequired;
     }
 
     if (!formData.email.trim()) {
-      newErrors.email = 'Email is required';
+      newErrors.email = contact.validation.emailRequired;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = 'Please enter a valid email';
+      newErrors.email = contact.validation.emailInvalid;
     }
 
     if (!formData.subject) {
-      newErrors.subject = 'Please select a subject';
+      newErrors.subject = contact.validation.subjectRequired;
     }
 
     if (!formData.message.trim()) {
-      newErrors.message = 'Message is required';
+      newErrors.message = contact.validation.messageRequired;
     } else if (formData.message.trim().length < 20) {
-      newErrors.message = 'Message must be at least 20 characters';
+      newErrors.message = contact.validation.messageLength;
     }
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!formRef.current) return;
@@ -83,19 +79,19 @@ function ContactFormView() {
           setSubmitError(null);
           formRef.current?.reset();
         } else {
-          setSubmitError('Oops! There was a problem submitting your form');
+          setSubmitError(contact.submitError);
           setIsSubmitting(false);
           console.error('Form submission error:', response.statusText);
         }
       })
       .catch((error) => {
-        setSubmitError('Oops! There was a problem submitting your form');
+        setSubmitError(contact.submitError);
         setIsSubmitting(false);
         console.error('Form submission error:', error);
       });
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
+  const handleChange = (e: ContactFormChangeEvent) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
 
@@ -106,26 +102,7 @@ function ContactFormView() {
   };
 
   if (submitSuccess) {
-    return (
-      <div className="v2-contact-form__success">
-        <div className="v2-contact-form__success-icon">
-          <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
-            <circle cx="24" cy="24" r="22" stroke="currentColor" strokeWidth="2" />
-            <path
-              d="M16 24l6 6 12-12"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        </div>
-        <h3 className="v2-contact-form__success-title">Message Sent!</h3>
-        <p className="v2-contact-form__success-text">
-          Thank you for reaching out. I&apos;ll get back to you as soon as possible.
-        </p>
-      </div>
-    );
+    return <ContactFormSuccess />;
   }
 
   return (
@@ -138,80 +115,17 @@ function ContactFormView() {
       ref={formRef}
       noValidate
     >
-      <div className="v2-contact-form__row">
-        <Input
-          label="Name"
-          name="name"
-          type="text"
-          value={formData.name}
-          onChange={handleChange}
-          error={errors.name}
-          required
-          fullWidth
-          autoComplete="name"
-        />
-      </div>
-
-      <div className="v2-contact-form__row">
-        <Input
-          label="Email"
-          name="email"
-          type="email"
-          value={formData.email}
-          onChange={handleChange}
-          error={errors.email}
-          required
-          fullWidth
-          autoComplete="email"
-        />
-      </div>
-
-      <div className="v2-contact-form__row">
-        <Select
-          label="Subject"
-          name="subject"
-          value={formData.subject}
-          onChange={handleChange}
-          error={errors.subject}
-          required
-          fullWidth
-          options={SUBJECT_OPTIONS}
-        />
-      </div>
-
-      <div className="v2-contact-form__row">
-        <Textarea
-          label="Message"
-          name="message"
-          value={formData.message}
-          onChange={handleChange}
-          error={errors.message}
-          required
-          fullWidth
-          rows={6}
-          placeholder="Tell me about your project, question, or idea..."
-        />
-      </div>
+      <ContactIdentityFields formData={formData} errors={errors} onChange={handleChange} />
+      <ContactMessageFields formData={formData} errors={errors} onChange={handleChange} />
 
       {submitError && (
         <div className="v2-contact-form__error" role="alert">
-          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-            <circle cx="8" cy="8" r="7" stroke="currentColor" strokeWidth="1.5" />
-            <path d="M8 4v5M8 11v1" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
-          </svg>
           {submitError}
         </div>
       )}
 
-      <button
-        type="submit"
-        className={clsx(
-          'void-button void-button--primary void-button--lg v2-contact-form__submit',
-          isSubmitting && 'void-button--loading'
-        )}
-        disabled={isSubmitting}
-      >
-        {isSubmitting ? 'Sending...' : 'Send Message'}
+      <button type="submit" className="v2-contact-form__submit" disabled={isSubmitting}>
+        {isSubmitting ? contact.submitting : contact.submit}
       </button>
     </form>
   );
