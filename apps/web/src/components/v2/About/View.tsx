@@ -21,10 +21,10 @@ function V2AboutPageView() {
         <AboutNavigation />
         <div>
           <AboutContactSection />
-          <AboutPrinciplesSection />
           <AboutExperienceSection />
-          <AboutTechnicalRangeSection />
           <AboutWorkSection />
+          <AboutTechnicalRangeSection />
+          <AboutPrinciplesSection />
           <AboutExperimentsSection />
           <AboutElsewhereSection />
         </div>

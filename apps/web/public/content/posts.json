@@ -23,7 +23,7 @@
       "codex",
       "ollama"
     ],
-    "readingTime": "About 10 minutes",
+    "readingTime": "About 30 minutes",
     "featured": true,
     "visible": true
   },
@@ -181,7 +181,7 @@
     ],
     "readingTime": "Under 5 minutes",
     "featured": false,
-    "visible": true
+    "visible": false
   },
   {
     "id": "bun",

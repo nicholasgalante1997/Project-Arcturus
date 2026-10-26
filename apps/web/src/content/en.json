@@ -117,12 +117,12 @@
     },
     "navigation": [
       {
-        "label": "Selected Work",
-        "href": "#selected-work"
-      },
-      {
         "label": "Experience",
         "href": "#experience"
+      },
+      {
+        "label": "Selected Work",
+        "href": "#selected-work"
       },
       {
         "label": "Technical Range",
@@ -146,10 +146,10 @@
           "name": "AI / LLM Registry",
           "context": "Charter Communications · Principal architect, primary implementer, technical lead maintainer",
           "claim": "A company-wide registry for versioned agent assets, built on the durable ideas behind npm and container registries.",
-          "description": "I architected, implemented, and delivered a vendor-neutral platform for distributing serializable large language model asset configurations (Agents, Skills, Model Configs, MCP Support, etc.) across harnesses and IDEs (Cross Agent/IDE Support). Namespaced assets have owners, semantic versions, dependencies, tags, update and yank semantics, and complete local history. A CAC-based npm client exposes installation, discovery, submission, rollback, and a suite of roughly thirty other operations that support improved agentic development workflows.",
+          "description": "I architected, implemented, and delivered a vendor-neutral platform for distributing serializable large language model assets (Agents, Skills, Model Configs, MCP Support, etc.) with extensible cross harness support and integrations, with full-fledged support for semantic versioning, team-scoped namespaces, an localized history database model. A CAC-based bun LI client exposes installation, discovery, submission, rollback, and a suite of roughly thirty other operations that support improved agentic development workflows.",
           "evidence": [
-            "Several hundred to low-thousands of cataloged assets",
-            "Adopted company wide across 40 to 50 organizational namespaces",
+            "Thousands of cataloged, published, and installed assets",
+            "Adopted company wide",
             "SQLite-backed client history, dependency installation, rollback, and nightly releases"
           ],
           "technologies": "TypeScript, Bun, npm, CAC, SQLite, Rust, PostgreSQL",
@@ -160,7 +160,7 @@
           "name": "Springfield",
           "context": "Charter Communications · Principal architect, implementer, long-term owner",
           "claim": "A deterministic software-intelligence platform that turns a massive system (65+) of distributed frontends into a queryable model of the system.",
-          "description": "I built Springfield end to end as a stateless ETL system. It clones source packages into deterministic temporary filesystem locations, crawls them in parallel, converts source into ASTs, and runs purpose-built pipelines over the result. Those pipelines map cross-package imports and exports, catalog React components and hooks, reproduce component rendering, and trace downstream service and payload usage. The resulting data lakes are available through REST, GraphQL, MCP tools, and a conversational interface. Models can consume Springfield's facts. This has supported enhanced observability into the system, and worked to starkly increase developer and product velocity.",
+          "description": "I built Springfield end to end as a stateless ETL system. It clones source packages into deterministic temporary filesystem locations, crawls them in parallel, converts source into ASTs, and runs ETL pipelines over the result, converting source code data into size optimized intermediary representative data files, and finally ingesting those data files into a series of databases. Those pipelines map cross-package imports and exports, catalog React components and hooks, reproduce component rendering, and trace downstream service and payload usage. The resulting data lakes are available through REST, GraphQL, MCP tools, and a conversational interface. Models can consume Springfield's facts. This has supported enhanced observability into the system, and worked to improve developer experience and starkly increase developer and product velocity in this distributed microfrontend model.",
           "evidence": [
             "295 total crawled packages and more than 30,000 source files",
             "More than 2,500 modules and 2,500 React components",
@@ -175,14 +175,14 @@
           "name": "Amazon Platform Engineering",
           "context": "Amazon Games · Software Development Engineer",
           "claim": "Platform work spanning design systems, microfrontends, regulated payments, and production reliability.",
-          "description": "I founded and technically led Gotham, a design system used across Prime Gaming, Prime Video, and digital-goods experiences. I also proposed, implemented, and owned the migration of a massive monolithic digital goods frontend toward distributed team level microfrontends, enabling autonomous releases, reducing builds from upwards of eleven minutes to under 2 minutes. I solutioned and implemented a microservice and edge function  for European payment and compliance requirements, and built high-availability synthetic monitoring (canaries) for critical customer paths.",
+          "description": "I founded and technically led GothamDS, a design system used across Prime Gaming, Prime Video, and digital-goods storefront experiences, offering extensive theming improvements and media immersification tooling over the standard AUI amazon ecommerce design system. I proposed, architected, implemented, and owned the migration of a massive monolithic digital goods next.js frontend toward distributed team level microfrontends with autonmous framework stacks, enabling autonomous decoupled releases, reducing builds from upwards of eleven minutes to under 2 minutes. I solutioned and implemented a microservice and edge function for European payment and compliance requirements, and built high-availability synthetic monitoring (canaries) for critical digital goods checkout and digital fulfillment flows using cloudformation and cloudwatch. Served as Lead Frontend Engineer for Amazon Games research and development lab, Playmaker Labs, publishing highly gamified storefront experiences in conjunction with Prime Gaming, Luna, and Twitch. Architected migration of client side rendered Prime Gaming storefront to a server side rendered application, with lazy asset loading, improving initial page load times by 68%.",
           "evidence": [
             "Shared interface foundations across multiple Amazon product organizations",
             "Build time reduced from eleven minutes to six",
             "Payment and compliance orchestration for European markets",
             "Synthetic monitoring for high-availability customer experiences"
           ],
-          "technologies": "React, TypeScript, design systems, microfrontends, AWS, distributed workflows",
+          "technologies": "React, TypeScript, Java, Kotlin, design systems, microfrontends,graphQL, AWS, distributed workflows",
           "href": ""
         },
         {
@@ -242,29 +242,14 @@
           "href": "https://github.com/mega-blastoise/bundt"
         },
         {
-          "index": "08",
-          "name": "DeckVault",
-          "context": "Independent · Flagship",
-          "claim": "A deliberately over-engineered Pokémon platform for exploring systems architecture with a domain I actually enjoy.",
-          "description": "Deckvault is a pokemon-themed love letter to microservice infrastructures, frameworkless performant server rendered react, and passion projects, and maybe, just maybe, a tool for Pokemon trainers to build better decks.",
-          "evidence": [
-            "React server rendering across a service-oriented backend",
-            "Relational, graph, and embedded persistence used for distinct jobs",
-            "A long-running architecture laboratory with real product constraints"
-          ],
-          "technologies": "React 19, Bun, Rust, GraphQL, PostgreSQL, Neo4j, SQLite, Docker",
-          "href": ""
-        },
-        {
           "index": "09",
           "name": "Project Arcturus",
           "context": "Independent · Flagship",
           "claim": "A long-lived publishing system and the site you are using now.",
-          "description": "If you thought deckvault was elegant React, you're going to plotz when you see this one. This is frameworkless, modern, organized, scalable React. To learn more about this project, read the article 'Project Arcturus'",
+          "description": "This is frameworkless, modern, organized, scalable React. To learn more about this project, read the article 'Project Arcturus'",
           "evidence": [
-            "Years of continuous architectural stewardship",
             "Static publishing backed by a structured content pipeline",
-            "Progressive design-system, accessibility, and rendering improvements"
+            "Progressive design-system, accessibility, and highly optimized framework-less prerendering pipeline"
           ],
           "technologies": "React, TypeScript, Bun, SSR, prerendering, content pipelines, monorepo tooling",
           "href": "https://github.com/nicholasgalante1997/Project-Arcturus"
@@ -279,7 +264,7 @@
           "period": "Aug 2023 — Present",
           "role": "Senior Software Engineer, Technical Lead for the Agent Tools Design Technology Team",
           "organization": "Charter Communications · Spectrum",
-          "description": "I "
+          "description": "At Charter, I serve as Technical Lead for AT Design Tech team, as well as act as an individual contributor. I support internal tooling feature development "
         },
         {
           "period": "Aug 2021 — Jun 2023",
@@ -313,7 +298,20 @@
       "groups": [
         {
           "title": "Languages & runtimes",
-          "items": ["Rust", "TypeScript", "JavaScript", "Bun", "Node.js", "Java", "Kotlin", "Zig", "C", "Python", "SQL", "Shell"]
+          "items": [
+            "Rust",
+            "TypeScript",
+            "JavaScript",
+            "Bun",
+            "Node.js",
+            "Java",
+            "Kotlin",
+            "Zig",
+            "C",
+            "Python",
+            "SQL",
+            "Shell"
+          ]
         },
         {
           "title": "Web & interface architecture",
@@ -333,7 +331,16 @@
         },
         {
           "title": "Distributed systems & data",
-          "items": ["Service boundaries", "ETL pipelines", "PostgreSQL", "SQLite", "Neo4j", "GraphQL", "REST", "AST Parsing"]
+          "items": [
+            "Service boundaries",
+            "ETL pipelines",
+            "PostgreSQL",
+            "SQLite",
+            "Neo4j",
+            "GraphQL",
+            "REST",
+            "AST Parsing"
+          ]
         },
         {
           "title": "Compilers, analysis & tooling",
@@ -360,7 +367,18 @@
         },
         {
           "title": "Infrastructure & delivery",
-          "items": ["AWS", "Docker", "Kubernetes", "Podman", "Gitlab CI/CD", "Observability", "Release engineering", "Artifactory", "Self Hosting with Linux", "Home Datacenters"]
+          "items": [
+            "AWS",
+            "Docker",
+            "Kubernetes",
+            "Podman",
+            "Gitlab CI/CD",
+            "Observability",
+            "Release engineering",
+            "Artifactory",
+            "Self Hosting with Linux",
+            "Home Datacenters"
+          ]
         },
         {
           "title": "Agent systems & local inference",

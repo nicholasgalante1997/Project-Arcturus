@@ -98,6 +98,7 @@
     "github-slugger": "^2.0.0",
     "gsap": "^3.12.7",
     "highlight.js": "^11.11.1",
+    "mermaid": "^12.2.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
     "react-error-boundary": "^6.0.0",

@@ -2,6 +2,18 @@ import { merge } from 'webpack-merge';
 
 var optimize = true;
 
+const mermaidPackagePath = /[\\/]node_modules[\\/](?:mermaid|@mermaid-js)[\\/]/;
+
+function isMermaidDependency(module, { moduleGraph }) {
+  for (let issuer = module; issuer; issuer = moduleGraph.getIssuer(issuer)) {
+    if (mermaidPackagePath.test(issuer.resource ?? '')) {
+      return true;
+    }
+  }
+
+  return false;
+}
+
 /**
  * @param {import('webpack').Configuration} config
  * @param {boolean} optimize
@@ -31,6 +43,13 @@ export function addSplitChunksWebpackOptimization(config) {
             name: 'vendors',
             chunks: 'all',
             priority: 10,
+            reuseExistingChunk: true
+          },
+          mermaid: {
+            test: isMermaidDependency,
+            name: 'mermaid',
+            chunks: 'async',
+            priority: 20,
             reuseExistingChunk: true
           },
           common: {
