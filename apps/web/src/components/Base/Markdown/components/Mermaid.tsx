@@ -55,7 +55,7 @@ function MermaidDiagram({ chart }: MermaidDiagramProps) {
 
     void (async () => {
       try {
-        const { default: mermaid } = await import(/* webpackChunkName: "mermaid" */ 'mermaid');
+        const { default: mermaid } = await import('mermaid');
 
         mermaid.initialize({ startOnLoad: false, securityLevel: 'strict' });
 

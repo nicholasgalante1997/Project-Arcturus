@@ -5,7 +5,7 @@ type LazyRouteObject = Exclude<RouteObject['lazy'], undefined>;
 /**
  * createLazyRouteConfiguration
  *
- * @see https://webpack.js.org/api/module-methods/#dynamic-expressions-in-import
+ * @see https://vite.dev/guide/features#dynamic-import
  * @see https://reactrouter.com/start/data/custom#3-lazy-loading
  *
  * Similar to how we can lazy load a Component using React.lazy,
@@ -18,26 +18,13 @@ type LazyRouteObject = Exclude<RouteObject['lazy'], undefined>;
  * So that we can lazy load a React Page for a given route,
  * and so that we can lazy load/provision any data loaders that route depends on.
  *
- * Since we're using Webpack as our bundler,
- * we can use Magic Comments to control how Webpack handles these dynamic imports,
- * and chunk each bundle separately, and still instruct our final markup
- * to preload/prefetch these resources as necessary.
+ * Vite statically analyzes this template-literal import (it must stay relative
+ * and include the file extension) and emits one chunk per file in `src/pages`.
+ * Bun resolves the same expression at runtime during prerender.
  */
 
 export function createLazyRouteConfiguration(page: string): LazyRouteObject {
   return {
-    Component: async () =>
-      (
-        await import(
-          /* webpackChunkName: "[request]~chunk" */
-          /* webpackInclude: /\.(js|jsx|ts|tsx)$/ */
-          /* webpackMode: "lazy" */
-          /* webpackExports: ["default"] */
-          /* webpackFetchPriority: "high" */
-          /* webpackPrefetch: true */
-          /* webpackPreload: true */
-          '@/pages/' + page
-        )
-      ).default
+    Component: async () => (await import(`../../pages/${page}.tsx`)).default
   };
 }

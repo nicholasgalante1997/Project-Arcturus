@@ -8,7 +8,7 @@ Arc-Jr is a sophisticated monorepo for server-side rendered React with static pr
 - Build-time prerendering with React 19's experimental `prerender` API
 - Isomorphic data fetching with TanStack Query
 - Type-safe development with strict TypeScript
-- Modular Webpack build system with SWC compilation
+- Vite build system (Rolldown bundler, Oxc transforms)
 - Clean component architecture with Container/View separation
 
 ## Architecture
@@ -66,17 +66,17 @@ ComponentName/
 
 ### Build System
 
-**Webpack Configuration:**
-- Modular setup: common.mjs, development.mjs, prod.mjs
-- SWC loader with thread-loader for parallel compilation
-- Code splitting: vendors, runtime, React runtime, route chunks
-- Magic comments for lazy-loaded routes with prefetch
-- Terser minification with SWC backend
+**Vite Configuration (`apps/web/vite.config.ts`):**
+- Dev server serves `index.html` (entry: `src/dev/bootstrap.ts`) with React Fast Refresh; `public/` is served at `/`
+- Production bundle entry is `src/main.tsx`; no HTML is emitted — the prerenderer reads `dist/.vite/manifest.json` to find the hashed entry
+- Code splitting: `react-runtime`, `vendors`, one chunk per `src/pages/*` file, lazy mermaid chunks
+- Lazy routes use a relative template-literal import (`../../pages/${page}.tsx`) so both Vite and Bun can resolve it
+- Browser `process.env.*` values are inlined via `define` — add new keys to `BROWSER_ENV_KEYS`
 - Source maps for debugging
 
 **Build Order:**
 1. Clean previous builds
-2. Bundle with Webpack
+2. Bundle with Vite
 3. Copy static assets
 4. Prerender all routes
 5. Process CSS with PostCSS
@@ -173,7 +173,7 @@ Bun provides:
 ```bash
 bun run dev
 ```
-Starts Webpack dev server with HMR at http://localhost:3000
+Starts Vite dev server with HMR at http://localhost:3000
 
 ### Production Build
 ```bash
@@ -217,7 +217,7 @@ bun run bundle:analyze
 mise run dev
 ```
 
-Starts Webpack dev server with HMR at http://localhost:3000
+Starts Vite dev server with HMR at http://localhost:3000
 
 ### Production Build
 ```bash
@@ -284,7 +284,7 @@ Posts and RFCs live in `packages/content-data/{posts,rfcs}/*` — Zod-validated 
 - **React 19.1** with SSR and Suspense
 - **React Router 7.8** with lazy loading
 - **TypeScript** with strict mode
-- **Webpack 5** with SWC compilation
+- **Vite 8** (Rolldown) for dev server and bundling
 - **TanStack Query 5** with SSR support
 - **Bun 1.3** runtime and package manager
 - **Turborepo 2.6** for monorepo orchestration
