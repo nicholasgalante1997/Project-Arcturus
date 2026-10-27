@@ -19,7 +19,11 @@ function AboutExperienceSection() {
             <div>
               <h3>{role.role}</h3>
               <p className="v2-about-experience__organization">{role.organization}</p>
-              <p>{role.description}</p>
+              <ul>
+                {role.accolades?.map((accolade, index) => (
+                  <li key={index}>{accolade}</li>
+                ))}
+              </ul>
             </div>
           </article>
         ))}

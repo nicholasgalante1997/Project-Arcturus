@@ -264,13 +264,20 @@
           "period": "Aug 2023 — Present",
           "role": "Senior Software Engineer, Technical Lead for the Agent Tools Design Technology Team",
           "organization": "Charter Communications · Spectrum",
-          "description": "At Charter, I serve as Technical Lead for AT Design Tech team, as well as act as an individual contributor. I support internal tooling feature development "
+          "description": "At Charter, I serve as Technical Lead for AT Design Tech team, as well as act as an individual contributor. I support internal tooling feature development ",
+          "accolades": [
+            "Technical Lead for Agent Tools DT Software Engineering Team",
+            "Founder and Lead Technical Maintainer of Company Wide LLM Asset Registry",
+            "Founder and Lead Technical Maintainer of Agent Tools Microfrontend ETL Pipelines and Observability Platform (Springfield)",
+            "Senior Technical Interviewer"
+          ]
         },
         {
           "period": "Aug 2021 — Jun 2023",
           "role": "Software Development Engineer",
-          "organization": "Amazon Games",
-          "description": "I built platform capabilities spanning shared interfaces, microfrontend architecture, regulated payments, and production reliability."
+          "organization": "Amazon Games Research and Development, Prime Gaming · Amazon.com",
+          "description": "I built platform capabilities spanning shared interfaces, microfrontend architecture, regulated payments, and production reliability.",
+          "accolades": []
         },
         {
           "period": "Jan 2021 — Aug 2021",

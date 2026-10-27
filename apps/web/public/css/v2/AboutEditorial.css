@@ -287,6 +287,14 @@
   margin-block-end: var(--s-space-4);
 }
 
+.v2-about-experience ul li {
+  color: var(--s-text-muted);
+  font-size: var(--s-text-sm);
+  line-height: 1.5;
+  margin: 0 0 var(--s-space-2);
+  list-style: disc;
+}
+
 .v2-about-range,
 .v2-about-experiments {
   display: grid;
