@@ -27,10 +27,7 @@ class PostsService implements IPostsService {
     if (this._state.runtime === 'browser') {
       this._client = new BrowserPostsService();
     } else {
-      const { default: ServerPostsService } = await import(
-        /* webpackExclude: /\.(js|jsx|ts|tsx)$/ */
-        './server/PostsService'
-      );
+      const { default: ServerPostsService } = await import('./server/PostsService');
       this._client = new ServerPostsService();
     }
 
