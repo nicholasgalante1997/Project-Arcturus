@@ -3,19 +3,33 @@ import { memo } from 'react';
 import { pipeline } from '@/utils/pipeline';
 import { withProfiler } from '@/utils/profiler';
 
-import AboutHeroView from './components/AboutHero/View';
-import SkillsSectionView from './components/SkillsSection/View';
-import TimelineSectionView from './components/TimelineSection/View';
-import ValuesSectionView from './components/ValuesSection/View';
+import { AboutContactSection } from './components/AboutContactSection';
+import { AboutElsewhereSection } from './components/AboutElsewhereSection';
+import { AboutExperienceSection } from './components/AboutExperienceSection';
+import { AboutExperimentsSection } from './components/AboutExperimentsSection';
+import { AboutHero } from './components/AboutHero';
+import { AboutNavigation } from './components/AboutNavigation';
+import { AboutPrinciplesSection } from './components/AboutPrinciplesSection';
+import { AboutTechnicalRangeSection } from './components/AboutTechnicalRangeSection';
+import { AboutWorkSection } from './components/AboutWorkSection';
+
+const SHOW_EXPERIENCE_SECTION = 0;
 
 function V2AboutPageView() {
   return (
-    <div className="v2-about-page">
-      <div className="v2-container">
-        <AboutHeroView />
-        <ValuesSectionView />
-        <SkillsSectionView />
-        <TimelineSectionView />
+    <div className="v2-about-page v2-about-editorial">
+      <div className="wrapper">
+        <AboutHero />
+        <AboutNavigation />
+        <div>
+          <AboutExperienceSection />
+          <AboutWorkSection />
+          <AboutTechnicalRangeSection />
+          <AboutPrinciplesSection />
+          {!!SHOW_EXPERIENCE_SECTION && <AboutExperimentsSection />}
+          <AboutElsewhereSection />
+          <AboutContactSection />
+        </div>
       </div>
     </div>
   );

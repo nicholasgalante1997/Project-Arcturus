@@ -6,6 +6,7 @@ import rehypeSlug from 'rehype-slug';
 import remarkGfm from 'remark-gfm';
 
 import { CodeBlock } from '@/components/Base/Markdown/components/CodeBlock';
+import { MarkdownPre } from '@/components/Base/Markdown/components/Mermaid';
 import { modifiedSanitizationSchema } from '@/components/Base/Markdown/utils/rehype-sanitize';
 import { pipeline } from '@/utils/pipeline';
 
@@ -20,6 +21,9 @@ function PostContentView({ content }: PostContentProps) {
         components={{
           code: CodeBlock as React.ComponentType<
             React.ClassAttributes<HTMLElement> & React.HTMLAttributes<HTMLElement>
+          >,
+          pre: MarkdownPre as React.ComponentType<
+            React.ClassAttributes<HTMLPreElement> & React.HTMLAttributes<HTMLPreElement>
           >
         }}
       >
