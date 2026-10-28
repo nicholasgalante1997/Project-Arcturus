@@ -219,6 +219,10 @@
     padding-block: var(--s-space-16);
   }
 
+  .v2-home-page .v2-hero__cta {
+    min-block-size: 2.75rem;
+  }
+
   .v2-home-feature {
     grid-template-columns: 1fr;
     align-items: start;

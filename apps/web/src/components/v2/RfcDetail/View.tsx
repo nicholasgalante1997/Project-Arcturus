@@ -1,3 +1,4 @@
+import { parseISO } from 'date-fns';
 import { memo, use } from 'react';
 import { Link } from 'react-router';
 
@@ -32,7 +33,7 @@ function V2RfcDetailView({ queries }: V2RfcDetailViewProps) {
             </span>
             <span className="v2-rfc-detail__version">v{rfc.version}</span>
             <time className="v2-rfc-detail__date" dateTime={rfc.date}>
-              {new Date(rfc.date).toLocaleDateString(copy.site.locale, {
+              {parseISO(rfc.date).toLocaleDateString(copy.site.locale, {
                 year: 'numeric',
                 month: 'long',
                 day: 'numeric'
