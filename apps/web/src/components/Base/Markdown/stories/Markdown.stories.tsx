@@ -17,4 +17,11 @@ export const Primary: Story = {
   render: (args) => <Markdown {...args} />
 };
 
+export const Mermaid: Story = {
+  args: {
+    markdown: '```mermaid\ngraph LR\n  Author --> Reader\n```'
+  },
+  render: (args) => <Markdown {...args} />
+};
+
 export default meta;

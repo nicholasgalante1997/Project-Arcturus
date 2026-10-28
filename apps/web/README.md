@@ -271,13 +271,8 @@ Arc-JR/
 │   ├── App.tsx          # Root App component
 │   ├── bootstrap.tsx    # Client-side bootstrap logic
 │   └── main.tsx         # Entry point
-├── webpack/
-│   ├── common.mjs       # Shared Webpack config
-│   ├── development.mjs  # Dev server config
-│   ├── prod.mjs         # Production config
-│   ├── swc/             # SWC compiler options
-│   ├── html/            # HTML template utilities
-│   └── utils/           # Webpack utilities
+├── index.html           # Vite dev server entry HTML
+├── vite.config.ts       # Vite dev server + production bundle config
 ├── scripts/
 │   ├── prerender.tsx    # SSR prerendering script
 │   └── lib/             # Prerender utilities

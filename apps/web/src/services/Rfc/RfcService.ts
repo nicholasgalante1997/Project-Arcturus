@@ -27,10 +27,7 @@ class RfcService implements IRfcService {
     if (this._state.runtime === 'browser') {
       this._client = new BrowserRfcService();
     } else {
-      const { default: ServerRfcService } = await import(
-        /* webpackExclude: /\.(js|jsx|ts|tsx)$/ */
-        './server/RfcService'
-      );
+      const { default: ServerRfcService } = await import('./server/RfcService');
       this._client = new ServerRfcService();
     }
 

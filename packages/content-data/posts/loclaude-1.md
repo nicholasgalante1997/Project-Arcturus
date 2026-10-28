@@ -17,7 +17,8 @@ searchTerms:
   - ollama
   - loclaude
 readingTime: Under 5 minutes
-visible: true
+featured: false
+visible: false
 ---
 
 I've been working on a CLI tool called `loclaude` that lets you run Claude Code against local Ollama models instead of burning through Anthropic API usage limits. It's in prerelease now, and I wanted to walk through what it does, how to use it, and how it's built.

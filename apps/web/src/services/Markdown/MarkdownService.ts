@@ -25,10 +25,7 @@ class Markdown implements IMarkdownService {
     if (this._state.runtime === 'browser') {
       this._client = new BrowserMarkdownService();
     } else {
-      const { default: ServerMarkdownService } = await import(
-        /* webpackExclude: /\.(js|jsx|ts|tsx)$/ */
-        './server/MarkdownService'
-      );
+      const { default: ServerMarkdownService } = await import('./server/MarkdownService');
       this._client = new ServerMarkdownService();
     }
 
