@@ -16,7 +16,11 @@ function AboutTechnicalRangeSection() {
         {about.technicalRange.groups.map((group) => (
           <article key={group.title}>
             <h3>{group.title}</h3>
-            <p>{group.items.join(' · ')}</p>
+            <ul className="v2-about-range__list">
+              {group.items.map((item) => (
+                <li key={item}>{item}</li>
+              ))}
+            </ul>
           </article>
         ))}
       </div>

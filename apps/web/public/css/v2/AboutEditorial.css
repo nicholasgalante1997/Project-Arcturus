@@ -42,16 +42,17 @@
 }
 
 .v2-about-intro__role {
-  color: var(--s-text);
+  color: var(--s-text-muted);
   font-size: var(--s-text-sm);
   font-weight: 650;
   margin: 0 0 var(--s-space-2);
 }
 
 .v2-about-intro__availability {
-  color: var(--s-text-muted);
   font-size: var(--s-text-sm);
   margin: 0 0 var(--s-space-8);
+  margin-top: var(--s-space-4);
+  font-weight: 700;
 }
 
 .v2-about-actions {
@@ -316,6 +317,30 @@
   margin: 0;
 }
 
+.v2-about-range__list {
+  display: grid;
+  gap: var(--s-space-2) var(--s-space-6);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  list-style: none;
+  margin: var(--s-space-4) 0 0;
+  padding: 0;
+}
+
+.v2-about-range__list li {
+  color: var(--s-text-muted);
+  font-size: var(--s-text-sm);
+  line-height: 1.4;
+  padding-inline-start: 1em;
+  position: relative;
+}
+
+.v2-about-range__list li::before {
+  color: var(--s-accent);
+  content: '–';
+  inset-inline-start: 0;
+  position: absolute;
+}
+
 .v2-about-experiments h3 a {
   color: inherit;
   text-decoration: none;
@@ -413,5 +438,9 @@
   .v2-about-actions .v2-about-button--primary {
     flex-basis: 100%;
     text-align: center;
+  }
+
+  .v2-about-range__list {
+    grid-template-columns: 1fr;
   }
 }
