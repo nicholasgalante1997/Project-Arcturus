@@ -110,7 +110,7 @@
     "sleepydogs": "1.0.8-alpha.4"
   },
   "peerDependencies": {
-    "typescript": "latest"
+    "typescript": "~5.9.3"
   },
   "devDependencies": {
     "@arcjr/content-data": "workspace:*",

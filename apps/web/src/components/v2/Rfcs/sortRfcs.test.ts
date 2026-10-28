@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'bun:test';
 
-import type { Rfc } from '@/types/Rfc';
-
 import { sortRfcs } from './sortRfcs';
+
+import type { Rfc } from '@/types/Rfc';
 
 function rfc(code: string, updated: string): Rfc {
   return {

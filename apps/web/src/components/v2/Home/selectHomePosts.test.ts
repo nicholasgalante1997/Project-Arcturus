@@ -1,8 +1,8 @@
 import { describe, expect, test } from 'bun:test';
 
-import type { Post } from '@/types/Post';
-
 import { selectHomePosts } from './selectHomePosts';
+
+import type { Post } from '@/types/Post';
 
 function post(id: string, options: Partial<Post> = {}): Post {
   return {

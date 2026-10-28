@@ -1,7 +1,7 @@
 import { isValidElement, memo, useEffect, useId, useRef, useState } from 'react';
 
-import type { ComponentPropsWithoutRef, ReactNode } from 'react';
 import type { RenderResult } from 'mermaid';
+import type { ComponentPropsWithoutRef, ReactNode } from 'react';
 
 type CodeElementProps = {
   className?: string;

@@ -1,5 +1,7 @@
 import { createContext, useContext } from 'react';
+
 import { THEME_SEQUENCE } from '@/utils/theme';
+
 import { type ArcThemeContext as ArcThemeContextType } from './types';
 
 const defaultArcThemeContext: ArcThemeContextType = {
@@ -14,7 +16,7 @@ const defaultArcThemeContext: ArcThemeContextType = {
       this.theme = THEME_SEQUENCE[nextIndex] || 'system';
     }
   },
-  setTheme(theme) {}
+  setTheme() {}
 };
 
 export const ArcThemeContext = createContext<ArcThemeContextType>(defaultArcThemeContext);
