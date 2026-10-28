@@ -17,6 +17,7 @@ function SocialIcons({ links }: SocialIconsProps) {
           href={link.href}
           className="v2-footer__social-link"
           aria-label={link.ariaLabel}
+          title={link.title}
           target="_blank"
           rel="noopener noreferrer"
         >

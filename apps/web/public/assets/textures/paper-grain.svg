@@ -1,0 +1,147 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="320" height="320" viewBox="0 0 320 320">
+  <defs>
+    <filter id="grain" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.78" numOctaves="3" seed="12" stitchTiles="stitch" />
+      <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  2 0 0 0 -0.65" />
+    </filter>
+    <filter id="pulp" x="0" y="0" width="100%" height="100%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.025 0.15" numOctaves="3" seed="23" stitchTiles="stitch" />
+      <feColorMatrix type="matrix" values="0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  3 0 0 0 -1.2" />
+    </filter>
+  </defs>
+  <rect width="320" height="320" filter="url(#grain)" opacity=".8" />
+  <rect width="320" height="320" filter="url(#pulp)" opacity=".22" />
+  <!-- Deterministic scattered fibers, seed 41; every fiber stays inside the tile. -->
+  <g fill="none" stroke="white" stroke-linecap="round" opacity=".66">
+    <path d="M125.26 81.37q2.84 5.37 6.11 10.49" stroke-width="0.54" />
+    <path d="M175.49 125.99q0.39 -4.46 -1.01 -8.71" stroke-width="0.53" />
+    <path d="M259.08 142.30q0.67 2.26 2.53 3.72" stroke-width="0.36" />
+    <path d="M205.16 195.27q5.59 0.59 10.09 3.96" stroke-width="0.60" />
+    <path d="M259.59 77.04q-1.95 -4.93 -1.54 -10.21" stroke-width="0.53" />
+    <path d="M50.14 280.66q-3.72 -5.40 -4.80 -11.87" stroke-width="0.41" />
+    <path d="M195.01 191.60q1.45 5.87 4.92 10.81" stroke-width="0.41" />
+    <path d="M56.61 208.96q-4.01 2.67 -8.04 5.30" stroke-width="0.44" />
+    <path d="M20.33 53.41q-4.91 1.56 -9.93 2.66" stroke-width="0.56" />
+    <path d="M171.62 271.06q-2.70 -1.92 -3.49 -5.15" stroke-width="0.32" />
+    <path d="M25.56 265.85q2.82 -4.61 7.42 -7.45" stroke-width="0.53" />
+    <path d="M51.28 273.61q-2.65 -4.54 -5.88 -8.70" stroke-width="0.45" />
+    <path d="M261.73 294.81q-0.55 3.72 0.38 7.36" stroke-width="0.54" />
+    <path d="M133.90 145.40q2.63 -1.49 5.64 -1.16" stroke-width="0.54" />
+    <path d="M94.87 276.06q-2.46 5.62 -5.61 10.89" stroke-width="0.61" />
+    <path d="M233.33 227.75q1.98 1.93 1.03 4.53" stroke-width="0.36" />
+    <path d="M208.63 32.79q1.45 4.23 0.70 8.64" stroke-width="0.42" />
+    <path d="M80.69 211.42q4.56 4.63 9.54 8.79" stroke-width="0.55" />
+    <path d="M175.35 159.36q6.06 -0.08 11.74 -2.19" stroke-width="0.31" />
+    <path d="M186.14 288.98q-2.26 -3.41 -5.25 -6.21" stroke-width="0.36" />
+    <path d="M226.49 242.84q3.51 2.04 7.29 3.53" stroke-width="0.42" />
+    <path d="M213.06 283.20q1.91 -2.62 5.05 -3.38" stroke-width="0.60" />
+    <path d="M192.69 256.22q2.17 -1.94 3.94 -4.25" stroke-width="0.41" />
+    <path d="M246.87 215.94q-0.03 4.01 0.55 7.98" stroke-width="0.38" />
+    <path d="M67.29 152.48q2.96 3.01 7.15 3.48" stroke-width="0.59" />
+    <path d="M29.86 255.12q-2.54 -4.61 -2.11 -9.86" stroke-width="0.57" />
+    <path d="M71.07 248.49q-0.52 3.45 -2.93 5.99" stroke-width="0.60" />
+    <path d="M78.77 268.86q-2.19 -0.69 -4.47 -0.39" stroke-width="0.49" />
+    <path d="M21.89 254.49q-1.06 1.49 -0.42 3.21" stroke-width="0.55" />
+    <path d="M126.65 68.37q-4.27 -1.34 -8.74 -1.49" stroke-width="0.47" />
+    <path d="M179.81 224.47q0.94 2.21 1.78 4.46" stroke-width="0.56" />
+    <path d="M248.42 263.17q-4.23 3.07 -9.40 3.79" stroke-width="0.44" />
+    <path d="M33.50 257.91q4.85 0.80 9.70 -0.01" stroke-width="0.43" />
+    <path d="M246.11 38.83q-3.08 1.56 -4.47 4.73" stroke-width="0.36" />
+    <path d="M60.47 40.10q2.77 -1.86 3.39 -5.14" stroke-width="0.41" />
+    <path d="M258.32 70.92q5.91 -2.67 10.42 -7.32" stroke-width="0.54" />
+    <path d="M275.74 280.98q3.06 0.44 5.61 -1.30" stroke-width="0.57" />
+    <path d="M114.99 63.11q3.18 -2.20 6.24 -4.55" stroke-width="0.61" />
+    <path d="M155.28 87.73q-2.30 -3.54 -3.26 -7.66" stroke-width="0.54" />
+    <path d="M277.98 85.82q2.09 -4.84 4.05 -9.73" stroke-width="0.37" />
+    <path d="M208.16 96.17q0.71 5.77 -0.06 11.53" stroke-width="0.33" />
+    <path d="M260.88 304.50q-1.34 3.27 -2.40 6.63" stroke-width="0.56" />
+    <path d="M17.57 203.20q0.90 6.08 1.26 12.23" stroke-width="0.63" />
+    <path d="M145.44 205.27q2.60 -0.04 4.89 1.19" stroke-width="0.43" />
+    <path d="M64.54 136.95q2.91 3.54 7.37 4.55" stroke-width="0.60" />
+    <path d="M195.61 300.67q-0.76 -4.61 -1.26 -9.26" stroke-width="0.33" />
+    <path d="M274.82 275.69q2.61 -4.32 3.34 -9.31" stroke-width="0.64" />
+    <path d="M297.81 238.78q6.18 0.85 12.41 1.27" stroke-width="0.46" />
+    <path d="M139.85 92.96q4.41 1.34 8.97 1.95" stroke-width="0.33" />
+    <path d="M283.48 277.81q2.49 -3.39 5.53 -6.29" stroke-width="0.46" />
+    <path d="M122.21 293.02q5.27 -2.85 10.48 -5.82" stroke-width="0.48" />
+    <path d="M214.64 98.46q3.26 5.59 5.17 11.76" stroke-width="0.39" />
+    <path d="M157.76 39.78q-2.12 -1.38 -4.55 -0.68" stroke-width="0.33" />
+    <path d="M248.20 92.47q2.72 -5.00 2.60 -10.69" stroke-width="0.36" />
+    <path d="M301.53 57.22q-0.90 1.25 -1.83 2.47" stroke-width="0.33" />
+    <path d="M176.23 286.46q-0.35 -4.90 1.88 -9.29" stroke-width="0.65" />
+    <path d="M120.51 291.24q0.69 3.25 3.65 4.75" stroke-width="0.56" />
+    <path d="M68.42 147.62q-2.90 0.14 -5.32 -1.45" stroke-width="0.33" />
+    <path d="M162.76 135.43q-1.89 3.44 -4.58 6.31" stroke-width="0.44" />
+    <path d="M237.04 57.27q3.46 1.55 6.17 4.22" stroke-width="0.47" />
+    <path d="M265.04 290.30q1.70 -5.93 4.97 -11.15" stroke-width="0.42" />
+    <path d="M46.60 98.59q0.35 2.73 -0.36 5.39" stroke-width="0.63" />
+    <path d="M164.45 276.71q-5.07 -1.43 -10.34 -1.79" stroke-width="0.51" />
+    <path d="M283.92 187.45q-2.67 1.22 -5.29 -0.12" stroke-width="0.45" />
+    <path d="M132.61 52.12q1.46 -0.65 3.04 -0.94" stroke-width="0.39" />
+    <path d="M133.23 258.31q3.56 -0.13 6.81 -1.57" stroke-width="0.61" />
+    <path d="M98.74 129.84q-4.94 2.88 -10.39 4.62" stroke-width="0.61" />
+    <path d="M68.12 212.81q-1.54 -0.85 -2.27 -2.45" stroke-width="0.59" />
+    <path d="M131.35 30.70q-4.11 0.88 -8.26 1.57" stroke-width="0.45" />
+    <path d="M287.94 209.87q-3.80 0.47 -7.01 2.57" stroke-width="0.38" />
+    <path d="M154.75 236.03q2.66 -0.01 3.78 2.41" stroke-width="0.53" />
+    <path d="M247.62 207.24q-1.51 -0.82 -2.42 -2.27" stroke-width="0.46" />
+    <path d="M112.34 87.09q-0.83 2.86 -3.65 3.81" stroke-width="0.50" />
+    <path d="M21.12 140.55q-4.91 2.68 -9.05 6.43" stroke-width="0.46" />
+    <path d="M15.78 221.83q0.78 -4.88 -1.54 -9.25" stroke-width="0.47" />
+    <path d="M129.58 170.02q4.39 1.90 7.33 5.67" stroke-width="0.53" />
+    <path d="M192.67 213.96q0.72 5.21 4.05 9.28" stroke-width="0.64" />
+    <path d="M237.45 59.96q1.88 -2.13 0.72 -4.72" stroke-width="0.31" />
+    <path d="M18.89 131.35q4.88 4.16 11.05 5.89" stroke-width="0.39" />
+    <path d="M267.93 116.18q2.16 -1.35 1.76 -3.86" stroke-width="0.46" />
+    <path d="M82.90 143.92q1.69 -0.07 3.37 0.03" stroke-width="0.51" />
+    <path d="M305.05 166.19q-0.13 3.20 -2.89 4.81" stroke-width="0.62" />
+    <path d="M218.24 91.21q0.64 -4.93 0.40 -9.89" stroke-width="0.46" />
+    <path d="M268.15 284.41q-0.04 -2.43 0.25 -4.85" stroke-width="0.53" />
+    <path d="M291.91 161.50q-1.67 1.59 -3.66 0.41" stroke-width="0.39" />
+    <path d="M211.50 76.65q-0.54 -4.73 0.29 -9.42" stroke-width="0.48" />
+    <path d="M257.66 23.14q-2.61 -4.80 -7.36 -7.52" stroke-width="0.42" />
+    <path d="M200.08 249.31q-2.52 4.82 -3.52 10.16" stroke-width="0.63" />
+    <path d="M135.02 45.88q-4.73 -1.82 -9.73 -1.01" stroke-width="0.56" />
+    <path d="M173.77 263.85q2.10 -4.11 5.39 -7.36" stroke-width="0.30" />
+    <path d="M185.17 17.89q-3.20 5.65 -7.65 10.38" stroke-width="0.54" />
+    <path d="M228.56 108.51q-4.33 -4.11 -9.52 -7.07" stroke-width="0.42" />
+  </g>
+  <g fill="white" opacity=".35">
+    <ellipse cx="316.31" cy="213.97" rx="0.27" ry="0.71" transform="rotate(141.1 316.31 213.97)" />
+    <ellipse cx="279.26" cy="266.33" rx="0.44" ry="0.53" transform="rotate(136.1 279.26 266.33)" />
+    <ellipse cx="243.63" cy="261.86" rx="0.26" ry="0.79" transform="rotate(103.6 243.63 261.86)" />
+    <ellipse cx="289.15" cy="165.37" rx="0.43" ry="0.62" transform="rotate(52.4 289.15 165.37)" />
+    <ellipse cx="157.01" cy="261.62" rx="0.28" ry="0.77" transform="rotate(131.7 157.01 261.62)" />
+    <ellipse cx="251.01" cy="168.64" rx="0.41" ry="0.64" transform="rotate(74.8 251.01 168.64)" />
+    <ellipse cx="2.61" cy="179.17" rx="0.41" ry="0.60" transform="rotate(72.1 2.61 179.17)" />
+    <ellipse cx="175.00" cy="35.08" rx="0.39" ry="0.38" transform="rotate(23.7 175.00 35.08)" />
+    <ellipse cx="27.12" cy="303.02" rx="0.47" ry="0.63" transform="rotate(168.8 27.12 303.02)" />
+    <ellipse cx="68.20" cy="211.21" rx="0.34" ry="0.40" transform="rotate(103.9 68.20 211.21)" />
+    <ellipse cx="36.88" cy="90.61" rx="0.24" ry="0.46" transform="rotate(161.4 36.88 90.61)" />
+    <ellipse cx="157.95" cy="175.64" rx="0.24" ry="0.42" transform="rotate(19.0 157.95 175.64)" />
+    <ellipse cx="223.63" cy="184.83" rx="0.42" ry="0.61" transform="rotate(45.2 223.63 184.83)" />
+    <ellipse cx="127.94" cy="117.91" rx="0.48" ry="0.67" transform="rotate(149.8 127.94 117.91)" />
+    <ellipse cx="209.85" cy="306.14" rx="0.43" ry="0.35" transform="rotate(14.4 209.85 306.14)" />
+    <ellipse cx="14.23" cy="284.35" rx="0.26" ry="0.56" transform="rotate(105.2 14.23 284.35)" />
+    <ellipse cx="72.81" cy="89.22" rx="0.46" ry="0.43" transform="rotate(149.7 72.81 89.22)" />
+    <ellipse cx="150.14" cy="219.81" rx="0.32" ry="0.66" transform="rotate(126.8 150.14 219.81)" />
+    <ellipse cx="135.58" cy="96.60" rx="0.33" ry="0.69" transform="rotate(2.0 135.58 96.60)" />
+    <ellipse cx="67.50" cy="112.83" rx="0.41" ry="0.58" transform="rotate(40.5 67.50 112.83)" />
+    <ellipse cx="279.66" cy="183.64" rx="0.47" ry="0.52" transform="rotate(171.1 279.66 183.64)" />
+    <ellipse cx="185.59" cy="111.33" rx="0.25" ry="0.71" transform="rotate(31.4 185.59 111.33)" />
+    <ellipse cx="261.66" cy="258.53" rx="0.24" ry="0.68" transform="rotate(126.2 261.66 258.53)" />
+    <ellipse cx="31.47" cy="241.92" rx="0.48" ry="0.50" transform="rotate(95.4 31.47 241.92)" />
+    <ellipse cx="131.72" cy="77.40" rx="0.25" ry="0.65" transform="rotate(174.2 131.72 77.40)" />
+    <ellipse cx="42.10" cy="8.84" rx="0.36" ry="0.47" transform="rotate(156.3 42.10 8.84)" />
+    <ellipse cx="94.75" cy="9.22" rx="0.29" ry="0.53" transform="rotate(77.9 94.75 9.22)" />
+    <ellipse cx="131.60" cy="92.02" rx="0.49" ry="0.36" transform="rotate(40.2 131.60 92.02)" />
+    <ellipse cx="261.08" cy="65.65" rx="0.26" ry="0.53" transform="rotate(113.8 261.08 65.65)" />
+    <ellipse cx="262.50" cy="250.72" rx="0.25" ry="0.77" transform="rotate(31.5 262.50 250.72)" />
+    <ellipse cx="257.06" cy="273.52" rx="0.23" ry="0.52" transform="rotate(38.3 257.06 273.52)" />
+    <ellipse cx="147.63" cy="249.20" rx="0.44" ry="0.69" transform="rotate(5.4 147.63 249.20)" />
+    <ellipse cx="93.53" cy="293.69" rx="0.42" ry="0.69" transform="rotate(31.3 93.53 293.69)" />
+    <ellipse cx="51.26" cy="156.58" rx="0.38" ry="0.41" transform="rotate(157.4 51.26 156.58)" />
+    <ellipse cx="182.98" cy="295.23" rx="0.47" ry="0.53" transform="rotate(49.6 182.98 295.23)" />
+    <ellipse cx="266.28" cy="159.20" rx="0.38" ry="0.67" transform="rotate(176.0 266.28 159.20)" />
+  </g>
+</svg>

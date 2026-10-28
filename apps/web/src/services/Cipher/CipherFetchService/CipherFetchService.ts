@@ -26,10 +26,7 @@ class CipherFetchService implements ICipherFetchService {
     if (this._state.runtime === 'browser') {
       this._client = new BrowserCipherFetchService();
     } else {
-      const { default: ServerCipherFetchService } = await import(
-        /* webpackExclude: /\.(js|jsx|ts|tsx)$/ */
-        './server/CipherFetchService'
-      );
+      const { default: ServerCipherFetchService } = await import('./server/CipherFetchService');
       this._client = new ServerCipherFetchService();
     }
 

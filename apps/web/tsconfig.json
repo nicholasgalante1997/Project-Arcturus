@@ -40,6 +40,6 @@
     ],
     "types": ["bun", "node"]
   },
-  "include": ["./.cipher/**/*.ts", "./scripts/**/*", "src/**/*", "webpack/**/*"],
+  "include": ["./.cipher/**/*.ts", "./scripts/**/*", "src/**/*", "vite.config.ts"],
   "exclude": ["node_modules", "dist"]
 }

@@ -7,6 +7,7 @@ import remarkGfm from 'remark-gfm';
 import { pipeline } from '@/utils/pipeline';
 
 import { CodeBlock } from './components/CodeBlock';
+import { MarkdownPre } from './components/Mermaid';
 import { modifiedSanitizationSchema } from './utils/rehype-sanitize';
 import { MarkdownViewProps } from './types';
 
@@ -18,6 +19,9 @@ function MarkdownView({ markdown }: MarkdownViewProps) {
       components={{
         code: CodeBlock as React.ComponentType<
           React.ClassAttributes<HTMLElement> & React.HTMLAttributes<HTMLElement>
+        >,
+        pre: MarkdownPre as React.ComponentType<
+          React.ClassAttributes<HTMLPreElement> & React.HTMLAttributes<HTMLPreElement>
         >
       }}
     >

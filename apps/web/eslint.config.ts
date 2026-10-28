@@ -17,6 +17,7 @@ export default defineConfig([
   },
   tseslint.configs.recommended,
   {
+    files: ['**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}'],
     ...pluginReact.configs.flat.recommended,
     settings: {
       react: {
@@ -58,7 +59,11 @@ export default defineConfig([
     rules: {
       'react/react-in-jsx-scope': 'off',
       '@typescript-eslint/triple-slash-reference': 'off',
-      '@typescript-eslint/no-empty-object-type': 'off'
+      '@typescript-eslint/no-empty-object-type': 'off',
+      '@typescript-eslint/no-unused-vars': [
+        'error',
+        { argsIgnorePattern: '^_', varsIgnorePattern: '^_', destructuredArrayIgnorePattern: '^_' }
+      ]
     }
   },
   { files: ['**/*.json'], plugins: { json }, language: 'json/json', extends: ['json/recommended'] },

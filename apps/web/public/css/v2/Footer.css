@@ -64,6 +64,7 @@
   line-height: 1.6;
   color: var(--void-color-gray-400);
   margin: 0;
+  text-align: left;
 }
 
 /* Social Links */

@@ -1,0 +1,190 @@
+/* The paper palette is scoped to the shell so its header, page, and footer agree. */
+.v2-app-layout[data-background='paper'] {
+  --s-surface-0: light-dark(oklch(0.977 0.011 85), oklch(0.185 0.004 85));
+  --s-surface-1: light-dark(oklch(0.949 0.015 85), oklch(0.225 0.005 85));
+  --s-surface-2: light-dark(oklch(0.915 0.018 85), oklch(0.28 0.006 85));
+  --s-text: light-dark(oklch(0.25 0.015 70), oklch(0.93 0.009 85));
+  --s-text-muted: light-dark(oklch(0.47 0.018 75), oklch(0.7 0.012 85));
+  --s-text-subtle: light-dark(oklch(0.64 0.018 80), oklch(0.46 0.012 80));
+  --s-border-subtle: light-dark(oklch(0.87 0.018 85), oklch(0.32 0.01 75));
+  --s-border-strong: light-dark(oklch(0.64 0.018 80), oklch(0.48 0.012 80));
+  --s-accent-wash: color-mix(in oklab, var(--s-accent) 9%, var(--s-surface-0));
+
+  /* Resolve the migration aliases in the same scope as the paper tokens. */
+  --void-color-base-black: var(--s-surface-0);
+  --void-color-base-white: var(--s-text);
+  --void-color-gray-950: var(--s-surface-1);
+  --void-color-gray-900: var(--s-surface-1);
+  --void-color-gray-800: var(--s-border-subtle);
+  --void-color-gray-700: var(--s-border-strong);
+  --void-color-gray-600: var(--s-text-subtle);
+  --void-color-gray-500: var(--s-text-muted);
+  --void-color-gray-400: var(--s-text-muted);
+  --void-color-gray-300: var(--s-text);
+  --void-color-gray-200: var(--s-text);
+
+  background: var(--s-surface-0);
+}
+
+/* Keep the footer and its outer spacing on the same sheet of paper. */
+.v2-app-layout[data-background='paper'] .v2-footer {
+  background: transparent;
+}
+
+/* One backdrop for the whole page, with quiet margins around the reading area. */
+.v2-app-layout {
+  position: relative;
+  isolation: isolate;
+}
+
+.v2-app-layout > .v2-site-background {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  overflow: clip;
+  pointer-events: none;
+  user-select: none;
+  animation: none;
+}
+
+.v2-site-background::before,
+.v2-site-background::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+}
+
+/* 01 — a drafting surface, with a plotted construction in the open margin. */
+.v2-site-background--drafting::before {
+  background-image:
+    linear-gradient(color-mix(in oklab, var(--s-text) 5%, transparent) 1px, transparent 1px),
+    linear-gradient(90deg, color-mix(in oklab, var(--s-text) 5%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  background-position: center top;
+  mask-image:
+    linear-gradient(to bottom, #000, transparent 56rem),
+    linear-gradient(to right, #000, transparent 20%, transparent 78%, #000);
+  mask-composite: intersect;
+}
+
+.v2-site-background__drawing {
+  position: absolute;
+  inset-block-start: -2rem;
+  inset-inline-end: max(-8rem, calc((100% - var(--s-wrapper)) / 2 - 10rem));
+  inline-size: clamp(30rem, 48vw, 46rem);
+  color: var(--s-accent);
+  mask-image: linear-gradient(to bottom, #000 50%, transparent);
+}
+
+.v2-site-background__construction {
+  opacity: 0.13;
+}
+
+.v2-site-background__plot {
+  opacity: 0.32;
+}
+
+/* Layered paper grain, pulp, and short fibers, with a stippled impression at the edge.
+ * A repeating SVG supplies alpha texture; semantic ink supplies its color. */
+.v2-site-background--paper {
+  background: radial-gradient(
+    ellipse 48rem 36rem at 100% 0,
+    color-mix(in oklab, var(--s-text) 2.5%, transparent),
+    transparent
+  );
+}
+
+.v2-site-background--paper::before {
+  background: light-dark(
+    color-mix(in oklab, var(--s-text) 11%, transparent),
+    color-mix(in oklab, var(--s-text) 6.5%, transparent)
+  );
+  mask-image: url('/assets/textures/paper-grain.svg');
+  mask-repeat: repeat;
+  mask-size: 320px 320px;
+}
+
+.v2-site-background--paper::after {
+  inset-block-end: auto;
+  inset-inline-start: 48%;
+  block-size: 48rem;
+  background-image:
+    radial-gradient(var(--s-text) 0.7px, transparent 1px),
+    radial-gradient(color-mix(in oklab, var(--s-text) 45%, transparent) 0.4px, transparent 0.7px);
+  background-size: 4px 4px, 7px 9px;
+  background-position: 0 0, 2px 3px;
+  mask-image: radial-gradient(ellipse at 100% 0, #000, transparent 72%);
+  opacity: 0.09;
+}
+
+/* The original paper study remains available for comparison. */
+.v2-site-background--paper-original::before {
+  background-image:
+    radial-gradient(color-mix(in oklab, var(--s-text) 9%, transparent) 0.55px, transparent 0.8px),
+    radial-gradient(color-mix(in oklab, var(--s-text) 6%, transparent) 0.5px, transparent 0.8px);
+  background-size: 7px 9px, 11px 13px;
+  background-position: 0 0, 3px 5px;
+  opacity: 0.5;
+}
+
+.v2-site-background--paper-original::after {
+  inset-block-end: auto;
+  inset-inline-start: 55%;
+  block-size: 42rem;
+  background-image: radial-gradient(var(--s-text) 0.8px, transparent 1px);
+  background-size: 5px 5px;
+  mask-image: radial-gradient(ellipse at 90% 20%, #000, transparent 67%);
+  opacity: 0.12;
+}
+
+/* 03 — a blue atmospheric wash crossed by wide, flowing contours. */
+.v2-site-background--contours::before {
+  block-size: 64rem;
+  background:
+    radial-gradient(ellipse at 100% 10%, color-mix(in oklab, var(--s-accent) 10%, transparent), transparent 62%),
+    radial-gradient(ellipse at 0% 30%, color-mix(in oklab, var(--s-text-subtle) 7%, transparent), transparent 55%);
+}
+
+.v2-site-background__contours {
+  position: absolute;
+  inset-block-start: -7rem;
+  inset-inline-end: -12rem;
+  inline-size: clamp(42rem, 65vw, 66rem);
+  color: var(--s-accent);
+  opacity: 0.15;
+  mask-image: linear-gradient(110deg, transparent 15%, #000 65%);
+}
+
+.v2-site-background--plain {
+  display: none;
+}
+
+@media (max-width: 48rem) {
+  .v2-site-background__drawing {
+    inset-block-start: -5rem;
+    inset-inline-end: -16rem;
+    opacity: 0.5;
+  }
+
+  .v2-site-background--paper::after {
+    inset-inline-start: 45%;
+    block-size: 30rem;
+    opacity: 0.065;
+  }
+
+  .v2-site-background--paper-original::after {
+    inset-inline-start: 30%;
+    opacity: 0.07;
+  }
+
+  .v2-site-background__contours {
+    inset-inline-end: -28rem;
+    opacity: 0.1;
+  }
+}
+
+@media print, (forced-colors: active) {
+  .v2-app-layout > .v2-site-background {
+    display: none;
+  }
+}

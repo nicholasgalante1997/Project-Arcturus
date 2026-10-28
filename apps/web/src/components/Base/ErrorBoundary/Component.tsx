@@ -49,7 +49,6 @@ class ErrorBoundary extends React.Component<ErrorBoundaryProps, ErrorBoundarySta
     });
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   componentDidUpdate(_prevProps: Readonly<ErrorBoundaryProps>) {
     if (this.props.forceErrorState && !this.state.hasError) {
       this.setState({ hasError: true });

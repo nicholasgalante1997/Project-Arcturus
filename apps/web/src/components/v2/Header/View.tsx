@@ -1,43 +1,29 @@
-import { ExternalLinksConfig } from '@arcjr/config';
 import clsx from 'clsx';
 import React from 'react';
-import { Link } from 'react-router';
 
+import copy from '@/content/en.json';
 import { pipeline } from '@/utils/pipeline';
+
+import {
+  HeaderBrand,
+  HeaderNavigation,
+  HeaderSocialLinks,
+  HeaderThemeToggle,
+  MobileMenu
+} from './components';
 
 import type { V2HeaderViewProps } from './types';
 
-export enum ARCJR_V2_TABS {
-  HOME = '/',
-  POSTS = '/post',
-  RFCS = '/rfc',
-  ABOUT = '/about',
-  CONTACT = '/contact'
-}
-
-export function getActiveTabByPathname(tab: string) {
-  if (typeof window === 'undefined') return 'default' as const;
-  const url = new URL(window.location.href);
-  const pathname = url.pathname;
-  if (tab === '/') {
-    if (pathname === '/') return 'active' as const;
-    return 'default' as const;
-  }
-
-  return pathname.startsWith(tab) ? ('active' as const) : ('default' as const);
-}
-
-const LINKEDIN_HREF = ExternalLinksConfig.ExternalLinkLinkedIn;
-const GITHUB_HREF = ExternalLinksConfig.ExternalLinkGithub;
-
-const SHOW_IMAGE_LOGO = false;
+export { ARCJR_V2_TABS, getActiveTabByPathname } from './constants';
 
 function V2HeaderView({
   transparent = false,
   className,
   isScrolled,
   isMobileMenuOpen,
-  onToggleMobileMenu
+  onToggleMobileMenu,
+  theme,
+  onCycleTheme
 }: V2HeaderViewProps) {
   const showBackground = !transparent || isScrolled;
 
@@ -48,67 +34,16 @@ function V2HeaderView({
       data-menu-open={isMobileMenuOpen}
     >
       <div className="container">
-        <Link id="header-logo" to="/">
-          {SHOW_IMAGE_LOGO && (
-            <img
-              src="/assets/poke-stock/champion-gang.webp"
-              alt="Profile Image"
-              style={{
-                objectFit: 'contain',
-                objectPosition: 'center',
-                aspectRatio: '4/3',
-                height: '64px',
-                width: 'auto',
-                overflow: 'hidden'
-              }}
-            />
-          )}
-
-          <h1>Arcturus</h1>
-        </Link>
-        <nav>
-          <ul>
-            <li>
-              <Link data-active-tab={getActiveTabByPathname(ARCJR_V2_TABS.HOME)} to="/">
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link data-active-tab={getActiveTabByPathname(ARCJR_V2_TABS.POSTS)} to="/posts">
-                Posts
-              </Link>
-            </li>
-            <li>
-              <Link data-active-tab={getActiveTabByPathname(ARCJR_V2_TABS.RFCS)} to="/rfcs">
-                RFCs
-              </Link>
-            </li>
-            <li>
-              <Link data-active-tab={getActiveTabByPathname(ARCJR_V2_TABS.ABOUT)} to="/about">
-                About
-              </Link>
-            </li>
-            <li>
-              <Link data-active-tab={getActiveTabByPathname(ARCJR_V2_TABS.CONTACT)} to="/contact">
-                Contact
-              </Link>
-            </li>
-          </ul>
+        <HeaderBrand />
+        <nav aria-label={copy.site.navigationLabel}>
+          <HeaderNavigation showActiveState />
         </nav>
-        <div className="external-links">
-          <Link className="external-icon-link" target="_blank" to={GITHUB_HREF} id="gh-icon-link">
-            <img height="24px" width="auto" src="/assets/icons/github-mark-white.svg" />
-          </Link>
-          <Link className="external-icon-link" target="_blank" to={LINKEDIN_HREF} id="in-icon-link">
-            <img height="24px" width="auto" src="/assets/icons/InBug-White.png" />
-          </Link>
-        </div>
-
-        {/* Mobile Menu Toggle */}
+        <HeaderSocialLinks secureLinks />
+        <HeaderThemeToggle theme={theme} onCycleTheme={onCycleTheme} />
         <button
           type="button"
           className="mobile-menu-toggle"
-          aria-label="Toggle navigation menu"
+          aria-label={copy.site.toggleNavigationLabel}
           aria-expanded={isMobileMenuOpen}
           onClick={onToggleMobileMenu}
         >
@@ -120,56 +55,7 @@ function V2HeaderView({
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <nav className="mobile-menu" aria-label="Mobile navigation">
-          <ul>
-            <li>
-              <Link to="/" onClick={onToggleMobileMenu}>
-                Home
-              </Link>
-            </li>
-            <li>
-              <Link to="/posts" onClick={onToggleMobileMenu}>
-                Posts
-              </Link>
-            </li>
-            <li>
-              <Link to="/rfcs" onClick={onToggleMobileMenu}>
-                RFCs
-              </Link>
-            </li>
-            <li>
-              <Link to="/about" onClick={onToggleMobileMenu}>
-                About
-              </Link>
-            </li>
-            <li>
-              <Link to="/contact" onClick={onToggleMobileMenu}>
-                Contact
-              </Link>
-            </li>
-          </ul>
-          <div className="external-links">
-            <Link
-              className="external-icon-link"
-              target="_blank"
-              to={GITHUB_HREF}
-              onClick={onToggleMobileMenu}
-            >
-              <img height="24px" width="auto" src="/assets/icons/github-mark-white.svg" />
-            </Link>
-            <Link
-              className="external-icon-link"
-              target="_blank"
-              to={LINKEDIN_HREF}
-              onClick={onToggleMobileMenu}
-            >
-              <img height="24px" width="auto" src="/assets/icons/InBug-White.png" />
-            </Link>
-          </div>
-        </nav>
-      )}
+      {isMobileMenuOpen && <MobileMenu onNavigate={onToggleMobileMenu} />}
     </header>
   );
 }

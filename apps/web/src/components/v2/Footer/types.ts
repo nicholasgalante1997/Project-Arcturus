@@ -21,4 +21,5 @@ export interface SocialLink {
   href: string;
   icon: ReactNode;
   ariaLabel: string;
+  title?: string;
 }
