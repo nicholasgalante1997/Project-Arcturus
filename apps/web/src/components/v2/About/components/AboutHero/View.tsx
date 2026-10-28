@@ -1,64 +1,71 @@
-import { memo } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router';
 
-import { pipeline } from '@/utils/pipeline';
+import { AnchorTooltip } from '@/components/v2/shared/AnchorTooltip';
+import config from '@/config/config';
+import copy from '@/content/en.json';
 
-const likes = [
-  'Performant, Scalable, Frameworkless React',
-  'Working in the Bun runtime',
-  'Supporting Decisions with Objective Metrics',
-  'Building Design Systems & Component Libraries',
-  'Accessibility as a First Class Citizen',
-  'Architecting High Availability Distributed Systems',
-  'Rust',
-  'Go',
-  'Cryptography',
-  'Dogs'
-];
-const dislikes = [
-  'Vercel/Next.js',
-  'React Frameworks',
-  'React Server Components',
-  'Vibe Coders',
-  'Anecdotal Evidence',
-  "People who aren't nice to animals."
-];
+import { AboutExternalLink } from '../AboutExternalLink';
 
-function AboutHeroView() {
+const { about } = copy;
+const TOOLTIP_ANCHOR_CLASS = 'subheadline-tooltip';
+const TOOLTIP_ANCHOR_NAME = `--${TOOLTIP_ANCHOR_CLASS}`;
+const TOOLTIP_ID = 'about-hero-introduction-tooltip';
+
+function AboutHero() {
+  const introductionRef = useRef<HTMLParagraphElement>(null);
+  const [showTooltip, setShowTooltip] = useState(false);
+
+  useEffect(() => {
+    const introductionElement = introductionRef.current;
+    if (!introductionElement) return;
+
+    introductionElement.innerHTML = about.hero.introduction;
+
+    const anchor = introductionElement.querySelector<HTMLElement>(`.${TOOLTIP_ANCHOR_CLASS}`);
+    if (!anchor) return;
+
+    const show = () => setShowTooltip(true);
+    const hide = () => setShowTooltip(false);
+
+    anchor.tabIndex = 0;
+    anchor.setAttribute('aria-describedby', TOOLTIP_ID);
+    anchor.addEventListener('mouseenter', show);
+    anchor.addEventListener('mouseleave', hide);
+    anchor.addEventListener('focus', show);
+    anchor.addEventListener('blur', hide);
+
+    return () => {
+      anchor.removeEventListener('mouseenter', show);
+      anchor.removeEventListener('mouseleave', hide);
+      anchor.removeEventListener('focus', show);
+      anchor.removeEventListener('blur', hide);
+    };
+  }, []);
+
   return (
-    <section className="v2-about-hero">
-      <div className="v2-about-hero__content">
-        <div className="v2-about-hero__image-container">
-          <img src="/assets/founder.webp" alt="Nick Galante" className="v2-about-hero__image" />
-          <div className="v2-about-hero__image-glow" aria-hidden="true" />
-        </div>
-        <div className="v2-about-hero__text">
-          <h1 className="v2-about-hero__title">
-            Hi, I&apos;m <span className="v2-about-hero__name">Nick</span>
-          </h1>
-          <p className="v2-about-hero__subtitle">Senior Software Engineer</p>
-          <p className="v2-about-hero__bio">
-            <b style={{ fontWeight: '600', color: 'white' }}>What I like and appreciate:</b>{' '}
-            {likes.join(', ')}
-            <br />
-            <b style={{ fontWeight: '600', color: 'white' }}>What I don&apos;t like:</b> {dislikes.join(', ')}
-          </p>
-          <div className="v2-about-hero__actions">
-            <a href="/contact" className="void-button void-button--primary">
-              Get in touch
-            </a>
-            <a
-              href="https://github.com/nicholasgalante1997"
-              className="void-button void-button--outline"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              View GitHub
-            </a>
-          </div>
-        </div>
+    <header className="v2-about-intro">
+      <h1>{about.hero.title}</h1>
+      <p className="v2-about-intro__lead" ref={introductionRef} />
+      <AnchorTooltip
+        id={TOOLTIP_ID}
+        className="v2-about-intro__tooltip"
+        visible={showTooltip}
+        anchor={TOOLTIP_ANCHOR_NAME}
+      >
+        {about.hero.tooltipMessage}
+      </AnchorTooltip>
+      <p className="v2-about-intro__role">{about.hero.role}</p>
+      <p className="v2-about-intro__availability">{about.hero.availability}</p>
+      <div className="v2-about-actions" aria-label={about.profileLinksLabel}>
+        <Link className="v2-about-button v2-about-button--primary" to="/contact">
+          {about.hero.contactLabel}
+        </Link>
+        <AboutExternalLink href={config.LINKS.GITHUB}>{about.hero.githubLabel}</AboutExternalLink>
+        <AboutExternalLink href={config.LINKS.LINKEDIN}>{about.hero.linkedinLabel}</AboutExternalLink>
       </div>
-    </section>
+    </header>
   );
 }
 
-export default pipeline(memo)(AboutHeroView);
+export default AboutHero;

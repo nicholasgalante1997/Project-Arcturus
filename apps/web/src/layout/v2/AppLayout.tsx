@@ -1,13 +1,18 @@
 import clsx from 'clsx';
 import React from 'react';
 import { ErrorBoundary } from 'react-error-boundary';
+import { useSearchParams } from 'react-router';
 
 import { DefaultFallbackErrorComponent } from '@/components/Base/Error';
-import { Starfield } from '@/components/Base/Starfield';
 import { V2Footer } from '@/components/v2/Footer';
 import { V2Header } from '@/components/v2/Header';
 import ArcSentry from '@/config/sentry/config';
+import copy from '@/content/en.json';
+import { ArcThemeProvider } from '@/context/theme';
 import { pipeline } from '@/utils/pipeline';
+
+import { SiteBackground } from './components/SiteBackground';
+import { resolveBackgroundTreatment } from './background';
 
 import type { V2AppLayoutProps } from './types';
 
@@ -15,7 +20,7 @@ import type { V2AppLayoutProps } from './types';
  * V2 App Layout component
  *
  * Composes the application shell with Header, Footer, and main content area.
- * Includes ErrorBoundary for error handling and Starfield background.
+ * Includes ErrorBoundary for error handling and a shared decorative background.
  *
  * @example
  * // Standard layout
@@ -35,21 +40,29 @@ function AppLayoutV2({
   className,
   showFooter = true
 }: V2AppLayoutProps) {
+  const [searchParams] = useSearchParams();
+  const background = resolveBackgroundTreatment(searchParams.get('background'));
+
   return (
     <ErrorBoundary
-      onError={ArcSentry.sentryReactDefaultErrorHandler}
+      onError={ArcSentry.sentryReactDefaultErrorHandler as (error: unknown, info: React.ErrorInfo) => void}
       fallbackRender={({ error, resetErrorBoundary }) => (
         <DefaultFallbackErrorComponent error={error} reset={resetErrorBoundary} />
       )}
     >
-      <div className={clsx('v2-app-layout', className)}>
-        <Starfield />
-        <V2Header transparent={transparentHeader} />
-        <main id="main-content" className="v2-app-layout__main">
-          {children}
-        </main>
-        {showFooter && <V2Footer />}
-      </div>
+      <ArcThemeProvider>
+        <div className={clsx('v2-app-layout', className)} data-background={background}>
+          <SiteBackground treatment={background} />
+          <a className="v2-skip-link" href="#main-content">
+            {copy.site.skipToContent}
+          </a>
+          <V2Header transparent={transparentHeader} />
+          <main id="main-content" className="v2-app-layout__main">
+            {children}
+          </main>
+          {showFooter && <V2Footer />}
+        </div>
+      </ArcThemeProvider>
     </ErrorBoundary>
   );
 }

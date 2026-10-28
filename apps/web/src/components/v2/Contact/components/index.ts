@@ -1,3 +1,4 @@
 export * from './ContactForm';
-export * from './ContactInfo';
-export * from './FAQSection';
+export * from './ContactFormSuccess';
+export * from './ContactIdentityFields';
+export * from './ContactMessageFields';

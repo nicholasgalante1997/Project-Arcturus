@@ -1,20 +1,22 @@
-import { format } from 'date-fns';
 import { memo } from 'react';
 import { Link } from 'react-router';
 
+import copy from '@/content/en.json';
+import { formatMessage } from '@/utils/formatMessage';
 import { pipeline } from '@/utils/pipeline';
+import { formatPostDate } from '@/utils/postPresentation';
 
 import type { PostHeaderProps } from '../../types';
 
 function PostHeaderView({ post, readingTime }: PostHeaderProps) {
-  const formattedDate = format(new Date(post.date), 'MMMM d, yyyy');
+  const formattedDate = formatPostDate(post.date);
 
   return (
     <header className="v2-post-header">
       {/* Breadcrumb */}
-      <nav className="v2-post-header__breadcrumb" aria-label="Breadcrumb">
-        <Link to="/v2/posts" className="v2-post-header__breadcrumb-link">
-          Posts
+      <nav className="v2-post-header__breadcrumb" aria-label={copy.postDetail.breadcrumbLabel}>
+        <Link to="/posts" className="v2-post-header__breadcrumb-link">
+          {copy.postDetail.postsLabel}
         </Link>
         <span className="v2-post-header__breadcrumb-separator" aria-hidden="true">
           /
@@ -28,7 +30,7 @@ function PostHeaderView({ post, readingTime }: PostHeaderProps) {
       {post.tags && post.tags.length > 0 && (
         <div className="v2-post-header__tags">
           {post.tags.map((tag) => (
-            <Link key={tag} to={`/v2/posts?tag=${encodeURIComponent(tag)}`} className="v2-post-header__tag">
+            <Link key={tag} to={`/posts?tag=${encodeURIComponent(tag)}`} className="v2-post-header__tag">
               {tag}
             </Link>
           ))}
@@ -46,7 +48,9 @@ function PostHeaderView({ post, readingTime }: PostHeaderProps) {
         <time className="v2-post-header__date" dateTime={post.date}>
           {formattedDate}
         </time>
-        <span className="v2-post-header__reading-time">{readingTime} min read</span>
+        <span className="v2-post-header__reading-time">
+          {formatMessage(copy.postDetail.readingTime, { minutes: readingTime })}
+        </span>
       </div>
 
       {/* Featured Image */}

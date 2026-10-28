@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import bash from 'react-syntax-highlighter/dist/esm/languages/prism/bash';
 import css from 'react-syntax-highlighter/dist/esm/languages/prism/css';
@@ -10,7 +10,9 @@ import rust from 'react-syntax-highlighter/dist/esm/languages/prism/rust';
 import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx';
 import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript';
 import yaml from 'react-syntax-highlighter/dist/esm/languages/prism/yaml';
-import { dracula } from 'react-syntax-highlighter/dist/esm/styles/prism';
+import { lucario, materialLight } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
+import { useArcThemeContext } from '@/context/theme/Context';
 
 import { CodeComponentProps } from './types';
 
@@ -72,6 +74,16 @@ const supportedLanguages = new Set([
   'markdown'
 ]);
 
+type SystemTheme = 'dark' | 'light';
+
+function getSystemTheme(): SystemTheme {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+    return 'light';
+  }
+
+  return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+}
+
 const CodeComponent: React.FC<CodeComponentProps> = ({ inline, className, children, ...props }) => {
   // Extract language from className
   const match = /language-(\w+)/.exec(className || '');
@@ -79,10 +91,36 @@ const CodeComponent: React.FC<CodeComponentProps> = ({ inline, className, childr
   const actualLanguage = language ? languageMap[language] || language : undefined;
   const shouldHighlight = !inline && actualLanguage && supportedLanguages.has(actualLanguage);
 
+  const { theme } = useArcThemeContext();
+  // Start from light on both the server and the first client render so prerendered
+  // markup hydrates consistently. The browser preference is applied after hydration.
+  const [systemTheme, setSystemTheme] = useState<SystemTheme>('light');
+
+  useEffect(() => {
+    if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+      return undefined;
+    }
+
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const updateSystemTheme = () => setSystemTheme(getSystemTheme());
+
+    updateSystemTheme();
+    mediaQuery.addEventListener('change', updateSystemTheme);
+
+    return () => mediaQuery.removeEventListener('change', updateSystemTheme);
+  }, []);
+
+  const codeTheme = useMemo(() => {
+    if (theme === 'system') {
+      return systemTheme === 'dark' ? lucario : materialLight;
+    }
+
+    return theme === 'dark' ? lucario : materialLight;
+  }, [theme, systemTheme]);
+
   if (shouldHighlight) {
     return (
       <SyntaxHighlighter
-        style={dracula}
         language={actualLanguage}
         PreTag="div"
         showLineNumbers={false} // Set to true if you want line numbers
@@ -94,6 +132,7 @@ const CodeComponent: React.FC<CodeComponentProps> = ({ inline, className, childr
           lineHeight: '1.5'
         }}
         {...props}
+        style={codeTheme as { [key: string]: React.CSSProperties }}
       >
         {String(children).replace(/\n$/, '')}
       </SyntaxHighlighter>

@@ -1,7 +1,8 @@
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { memo } from 'react';
 import { Link } from 'react-router';
 
+import copy from '@/content/en.json';
 import { pipeline } from '@/utils/pipeline';
 
 import type { RelatedPostsProps } from '../../types';
@@ -12,11 +13,11 @@ function RelatedPostsView({ posts }: RelatedPostsProps) {
   return (
     <section className="v2-related-posts" aria-labelledby="related-posts-title">
       <h2 id="related-posts-title" className="v2-related-posts__title">
-        Related Posts
+        {copy.postDetail.relatedPosts}
       </h2>
       <div className="v2-related-posts__grid">
         {posts.map((post) => (
-          <Link key={post.id} to={`/v2/post/${post.id}`} className="v2-related-posts__card">
+          <Link key={post.id} to={`/post/${post.id}`} className="v2-related-posts__card">
             {post.image && (
               <img
                 src={post.image.src}
@@ -28,7 +29,7 @@ function RelatedPostsView({ posts }: RelatedPostsProps) {
             <div className="v2-related-posts__content">
               <h3 className="v2-related-posts__card-title">{post.title}</h3>
               <time className="v2-related-posts__date" dateTime={post.date}>
-                {format(new Date(post.date), 'MMM d, yyyy')}
+                {format(parseISO(post.date), 'MMM d, yyyy')}
               </time>
             </div>
           </Link>
