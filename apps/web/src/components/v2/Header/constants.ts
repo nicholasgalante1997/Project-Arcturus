@@ -28,5 +28,6 @@ export const NAVIGATION_ITEMS = [
 ] as const;
 
 export const GITHUB_HREF = ExternalLinksConfig.ExternalLinkGithub;
+export const GITHUB_MEGA_BLASTOISE_HREF = ExternalLinksConfig.ExternalLinkGithubMegaBlastoise;
 export const LINKEDIN_HREF = ExternalLinksConfig.ExternalLinkLinkedIn;
 export const SHOW_IMAGE_LOGO = false;

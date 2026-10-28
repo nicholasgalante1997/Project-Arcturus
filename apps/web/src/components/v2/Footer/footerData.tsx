@@ -1,6 +1,6 @@
 import copy from '@/content/en.json';
 
-import { GitHubIcon, LinkedInIcon } from './components/FooterIcons';
+import { GitHubBadgeIcon, GitHubIcon, LinkedInIcon } from './components/FooterIcons';
 
 import type { FooterSection, SocialLink } from './types';
 
@@ -35,6 +35,13 @@ export const SOCIAL_LINKS: SocialLink[] = [
     href: 'https://github.com/nicholasgalante1997',
     icon: <GitHubIcon />,
     ariaLabel: copy.site.social.githubProfileLabel
+  },
+  {
+    name: copy.site.social.githubMegaBlastoise,
+    href: 'https://github.com/mega-blastoise',
+    icon: <GitHubBadgeIcon />,
+    ariaLabel: copy.site.social.githubMegaBlastoiseProfileLabel,
+    title: copy.site.social.githubMegaBlastoise
   },
   {
     name: copy.site.social.linkedin,

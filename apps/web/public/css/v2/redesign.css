@@ -275,6 +275,22 @@ header.v2-header .external-icon-link svg {
   block-size: 1rem;
 }
 
+/* Accent dot marking the secondary (mega-blastoise) GitHub account; the stroke
+   matches the link background so the dot reads as separate from the mark. */
+.v2-github-badge {
+  fill: var(--s-accent);
+  stroke: var(--s-surface-1);
+}
+
+.v2-footer__social-link .v2-github-badge {
+  stroke: var(--void-color-gray-900);
+  transition: stroke var(--void-transition-duration-fast) var(--void-transition-easing-ease);
+}
+
+.v2-footer__social-link:hover .v2-github-badge {
+  stroke: var(--void-color-brand-violet);
+}
+
 header.v2-header .theme-toggle {
   min-inline-size: 2.25rem;
   min-block-size: 2.25rem;
