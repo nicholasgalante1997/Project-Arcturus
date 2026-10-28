@@ -735,6 +735,32 @@ header.v2-header .theme-toggle svg {
     padding-block: var(--s-space-3);
   }
 
+  /* Keep the social icons as square buttons rather than full-width menu rows. */
+  header.v2-header .mobile-menu .external-links a.external-icon-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 2.75rem;
+    block-size: 2.75rem;
+    padding: 0;
+  }
+
+  header.v2-header .mobile-menu .external-links a.external-icon-link svg {
+    inline-size: 1.125rem;
+    block-size: 1.125rem;
+  }
+
+  /* Comfortable tap targets for text links without changing the visual rhythm. */
+  .v2-footer__link-list {
+    gap: 0;
+  }
+
+  .v2-footer__link {
+    display: inline-flex;
+    align-items: center;
+    min-block-size: 2.5rem;
+  }
+
   header.v2-header .theme-toggle {
     position: absolute;
     inset-block-start: 50%;

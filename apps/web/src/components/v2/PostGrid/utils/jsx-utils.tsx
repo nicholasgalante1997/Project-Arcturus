@@ -1,9 +1,10 @@
 import { Button } from '@arcjr/void-components';
+import { parseISO } from 'date-fns';
 import React from 'react';
 
 const formatter = (date: string | Date) =>
   new Intl.DateTimeFormat('en-US', { dateStyle: 'medium' }).format(
-    typeof date === 'string' ? new Date(date) : date
+    typeof date === 'string' ? parseISO(date) : date
   );
 
 export const getCardHeader = (title: string, attrs?: React.HTMLProps<HTMLHeadingElement>) => (

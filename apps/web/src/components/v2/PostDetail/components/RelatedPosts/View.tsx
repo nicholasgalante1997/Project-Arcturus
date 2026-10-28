@@ -1,4 +1,4 @@
-import { format } from 'date-fns';
+import { format, parseISO } from 'date-fns';
 import { memo } from 'react';
 import { Link } from 'react-router';
 
@@ -29,7 +29,7 @@ function RelatedPostsView({ posts }: RelatedPostsProps) {
             <div className="v2-related-posts__content">
               <h3 className="v2-related-posts__card-title">{post.title}</h3>
               <time className="v2-related-posts__date" dateTime={post.date}>
-                {format(new Date(post.date), 'MMM d, yyyy')}
+                {format(parseISO(post.date), 'MMM d, yyyy')}
               </time>
             </div>
           </Link>

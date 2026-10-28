@@ -1,15 +1,15 @@
-import { format } from 'date-fns';
 import { memo } from 'react';
 import { Link } from 'react-router';
 
 import copy from '@/content/en.json';
 import { formatMessage } from '@/utils/formatMessage';
 import { pipeline } from '@/utils/pipeline';
+import { formatPostDate } from '@/utils/postPresentation';
 
 import type { PostHeaderProps } from '../../types';
 
 function PostHeaderView({ post, readingTime }: PostHeaderProps) {
-  const formattedDate = format(new Date(post.date), 'MMMM d, yyyy');
+  const formattedDate = formatPostDate(post.date);
 
   return (
     <header className="v2-post-header">
